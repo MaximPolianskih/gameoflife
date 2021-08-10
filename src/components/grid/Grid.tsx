@@ -19,7 +19,7 @@ function Grid({ rows, cols }: IGridProps) {
         <GridItem
           col={i}
           row={j}
-          isActive={true}
+          isActive={false}
           clickHandler={ItemClickHandler}
           customStyle={{ gridRowStart: i, gridColumnStart: j }}
         />
@@ -32,7 +32,9 @@ function Grid({ rows, cols }: IGridProps) {
       <label>
         Выбрана я чейка: {selectItem.row}, {selectItem.col}
       </label>
-      <div className={cn(Grid.name)}>{grid}</div>
+      <div className={cn(Grid.name)} role={cn(Grid.name)}>
+        {grid}
+      </div>
     </div>
   );
 }
