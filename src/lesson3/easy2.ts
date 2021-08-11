@@ -3,7 +3,8 @@
 // Нужно заменить FIXME на тип который достанет из Order все возможные состояния (state)
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type FIXME = any;
+type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
+type FIXME = PropType<Order, 'state'>;
 
 type Order =
   | {
