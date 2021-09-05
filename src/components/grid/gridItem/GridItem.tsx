@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { CSSProperties, useState } from 'react';
 import './grid-item.css';
+import React from 'react';
 
 interface IGridItem {
   col: number;

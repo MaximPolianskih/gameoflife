@@ -2,6 +2,7 @@ import { ReactElement, useState } from 'react';
 import cn from 'classnames';
 import GridItem from './gridItem/GridItem';
 import './grid.css';
+import React from 'react';
 
 interface IGridProps {
   cols: number;

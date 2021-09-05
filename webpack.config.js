@@ -1,5 +1,5 @@
 const path = require('path');
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpackRules = require('./webpackRules');
 
 module.exports = {
@@ -36,4 +36,9 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+    }),
+  ],
 };
