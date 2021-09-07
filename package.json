@@ -31,6 +31,7 @@
     "@types/webpack-dev-server": "^4.1.0",
     "babel-jest": "^27.1.0",
     "babel-loader": "^8.2.2",
+    "chromatic": "^5.9.2",
     "jest": "^27.1.0",
     "react-test-renderer": "^17.0.2",
     "ts-node": "^10.2.1",
@@ -46,7 +47,8 @@
     "build:dev": "webpack --mode=development",
     "build": "npx webpack --mode production",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic --project-token=8ea31a599a4d"
   },
   "repository": {
     "type": "git",
