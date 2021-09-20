@@ -7,13 +7,4 @@ export default {
   component: Grid,
 } as ComponentMeta<typeof Grid>;
 
-const Template: ComponentStory<typeof Grid> = (args) => (
-  <Grid {...args} />
-);
-
-export const Default = Template.bind({});
- 
-Default.args = {
-  cols: 10,
-  rows: 10,
-} 
+export const Default = () => <Grid cols={10} rows={10} />;

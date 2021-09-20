@@ -4,8 +4,6 @@
   "description": "",
   "main": "index.tsx",
   "dependencies": {
-    "classnames": "^2.3.1",
-    "jest-mock": "^27.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -33,7 +31,9 @@
     "babel-jest": "^27.1.0",
     "babel-loader": "^8.2.2",
     "chromatic": "^5.9.2",
+    "classnames": "^2.3.1",
     "jest": "^27.1.0",
+    "jest-mock": "^27.1.1",
     "react-test-renderer": "^17.0.2",
     "ts-node": "^10.2.1",
     "tsconfig-paths": "^3.11.0",
@@ -46,10 +46,8 @@
     "test": "jest",
     "start": "webpack serve --mode development --hot",
     "build:dev": "webpack --mode=development",
-    "build": "npx webpack --mode production",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=8ea31a599a4d"
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",

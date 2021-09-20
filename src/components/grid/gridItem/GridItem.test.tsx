@@ -4,7 +4,9 @@ import GridItem from './GridItem';
 
 describe('GridItem', () => {
   test('renders GridItem component', () => {
-    var result = render(<GridItem />);
+    const result = render(
+      <GridItem col={0} row={0} isActive={false} clickHandler={() => {}} />
+    );
     expect(result.container.querySelector('.GridItem')).toBeInTheDocument();
   });
 }); 
