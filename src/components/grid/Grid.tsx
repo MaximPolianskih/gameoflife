@@ -23,6 +23,7 @@ function Grid({ rows, cols }: IGridProps) {
           isActive={false}
           clickHandler={ItemClickHandler}
           customStyle={{ gridRowStart: i, gridColumnStart: j }}
+          key = {`${i}-${j}`}
         />
       );
     }
