@@ -32,7 +32,7 @@ function Grid({ rows, cols }: IGridProps) {
   return (
     <div>
       <label>
-        Выбрана я чейка: {selectItem.row}, {selectItem.col}
+        Выбрана ячейка: {selectItem.row}, {selectItem.col}
       </label>
       <div className={cn(Grid.name)} role={cn(Grid.name)}>
         {grid}
