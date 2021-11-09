@@ -1,11 +1,13 @@
 export interface IOption {
-  rows: number;
-  cols: number;
+    rows: number;
+    cols: number;
+    percent: number;
+    speed: number;
 }
 
 let timeout: any;
 export async function GetOptionsFromServer(userName: string) {
-  await new Promise((f) => timeout = setTimeout(f, 3000));
+  await new Promise((f) => timeout = setTimeout(f, 1000));
   const options = localStorage.getItem(userName);
   return (options ? JSON.parse(options) : { rows: 10, cols: 10 }) as IOption;
 }

@@ -11,8 +11,6 @@ interface IGridProps {
 
 function Grid({ rows, cols }: IGridProps) {
   const grid: ReactElement[] = [];
-  const [selectItem, setSelectItem] = useState({ row: 0, col: 0 });
-  const ItemClickHandler = (row: number, col: number): void => setSelectItem({ row, col });
 
   for (let i = 1; i < rows + 1; i++) {
     for (let j = 1; j < cols + 1; j++) {
@@ -21,7 +19,7 @@ function Grid({ rows, cols }: IGridProps) {
           col={i}
           row={j}
           isActive={false}
-          clickHandler={ItemClickHandler}
+          clickHandler={() => {/*TODO сделать ручное заполнение*/ }}
           customStyle={{ gridRowStart: i, gridColumnStart: j }}
           key = {`${i}-${j}`}
         />
@@ -31,9 +29,6 @@ function Grid({ rows, cols }: IGridProps) {
 
   return (
     <div>
-      <label>
-        Выбрана ячейка: {selectItem.row}, {selectItem.col}
-      </label>
       <div className={cn(Grid.name)} role={cn(Grid.name)}>
         {grid}
       </div>

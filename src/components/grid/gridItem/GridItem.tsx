@@ -31,18 +31,13 @@ function GridItem({
         ...customStyle,
         ...(gridItemState.isActive
           ? { backgroundColor: 'green' }
-          : { backgroundColor: 'white' }),
+          : { backgroundColor: 'black' }),
       }}
       onClick={() => {
         clickHandler && clickHandler(col, row);
         isActiveSetter({ isActive: !gridItemState.isActive, col, row });
       }}
     >
-      <label className={cn('label')}>
-        {gridItemState.isActive
-          ? `${gridItemState.col}, ${gridItemState.row}`
-          : ''}
-      </label>
     </div>
   );
 }

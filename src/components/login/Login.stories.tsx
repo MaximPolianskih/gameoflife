@@ -1,10 +1,15 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Login from './Login';
+import Login, { LoginProcessEnum } from './Login';
 
 export default {
   title: 'GameOfLife/Login',
   component: Login,
 } as ComponentMeta<typeof Login>;
 
-export const Default = () => <Login />;
+const Template: ComponentStory<typeof Login> = args => <Login {...args} />;
+export const Default = Template.bind({});
+Default.args = {
+  onChange: (row: number, col: number) => { },
+  onLoginStatusChange: (loginStatus: LoginProcessEnum) => { }
+};
