@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import GameMenu from './gameMenu';
+import GameMenu from './GameMenu';
 
 export default {
     title: 'GameOfLife/GameMenu',

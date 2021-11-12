@@ -1,8 +1,9 @@
 import cn from 'classnames';
 import Grid from './components/grid/Grid';
 import React, { useState } from 'react';
-import Login, { LoginProcessEnum } from './components/login/Login';
-import GameMenu from './components/gameMenu/gameMenu';
+import { Login } from './components/login/Login';
+import GameMenu from './components/gameMenu/GameMenu';
+import { LoginProcessEnum } from './components/login/LoginReducer';
 
 function App() {
     const [currentState, setState] = useState({

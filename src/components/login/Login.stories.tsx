@@ -1,6 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Login, { LoginProcessEnum } from './Login';
+import { Login } from './Login';
+import { LoginProcessEnum } from './LoginReducer';
 
 export default {
   title: 'GameOfLife/Login',

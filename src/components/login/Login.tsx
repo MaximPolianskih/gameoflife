@@ -1,93 +1,77 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { ErrorHandler } from '../errorHandler/ErrorHandler';
 import Options from '../options/Options';
-
-export enum LoginProcessEnum {
-    Login,
-    Logout,
-}
+import {
+    changeUserName,
+    ILoginState,
+    login,
+    LoginProcessEnum,
+    logout,
+} from './LoginReducer';
 
 interface IProp {
     onChange: (row: number, col: number) => void;
     onLoginStatusChange: (loginStatus: LoginProcessEnum) => void;
 }
 
-interface IState {
-    loginStatus: LoginProcessEnum;
-    userName: string;
-}
+export const Login: React.FC<IProp> = props => {
+  const loginStatus = useSelector(state => (state as ILoginState).loginStatus);
+  const userName = useSelector(state => (state as ILoginState).userName);
+    const dispatch = useDispatch();
 
-class Login extends React.Component<IProp, IState> {
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            loginStatus: LoginProcessEnum.Logout,
-            userName: '',
-        };
-    }
-
-    Logout() {
-        this.setState({ loginStatus: LoginProcessEnum.Logout });
-        this.props.onLoginStatusChange(LoginProcessEnum.Logout);
-        this.props.onChange(0, 0);
-    }
-
-    Login() {
-        this.setState({ loginStatus: LoginProcessEnum.Login });
-        this.props.onLoginStatusChange(LoginProcessEnum.Login);
-    }
-
-    render() {
-        switch (this.state.loginStatus) {
-            case LoginProcessEnum.Login:
-                return (
-                    <div>
-                        <span data-testid="login-name">
-                            Пользователь: {this.state.userName}
-                        </span>
-                        <br></br>
-                        <ErrorHandler>
-                            <Options
-                                userName={this.state.userName}
-                                onChange={this.props.onChange}
-                            />
-                        </ErrorHandler>
-                        <br></br>
-                        <button
-                            data-testid="logout-button"
-                            onClick={() => this.Logout()}
-                        >
-                            Выйти
-                        </button>
-                    </div>
-                );
-            case LoginProcessEnum.Logout:
-                return (
-                    <div>
-                        <label>Введите имя пользователя:</label>
-                        <input
-                            data-testid="login-input"
-                            type="text"
-                            value={this.state.userName}
-                            onChange={e => {
-                                this.setState({ userName: e.target.value });
-                            }}
+    switch (loginStatus) {
+        case LoginProcessEnum.Login:
+            return (
+                <div>
+                    <span data-testid="login-name">
+                        Пользователь: {userName}
+                    </span>
+                    <br></br>
+                    <ErrorHandler>
+                        <Options
+                            userName={userName}
+                            onChange={props.onChange}
                         />
-                        <br></br>
-                        <button
-                            data-testid="login-button"
-                            onClick={() => this.Login()}
-                        >
-                            Войти
-                        </button>
-                    </div>
-                );
-            default:
-                throw Error(
-                    `Не корректное состояние загрузки настроек пользователя: ${this.state.loginStatus}`,
-                );
-        }
+                    </ErrorHandler>
+                    <br></br>
+                    <button
+                        data-testid="logout-button"
+                        onClick={() => {
+                            dispatch(logout);
+                            props.onLoginStatusChange(LoginProcessEnum.Login);
+                        }}
+                    >
+                        Выйти
+                    </button>
+                </div>
+            );
+        case LoginProcessEnum.Logout:
+            return (
+                <div>
+                    <label>Введите имя пользователя:</label>
+                    <input
+                        data-testid="login-input"
+                        type="text"
+                        value={userName}
+                        onChange={e => {
+                            dispatch(changeUserName(e.target.value));
+                        }}
+                    />
+                    <br></br>
+                    <button
+                        data-testid="login-button"
+                        onClick={() => {
+                            dispatch(login);
+                        }}
+                    >
+                        Войти
+                    </button>
+                </div>
+            );
+        default:
+            throw Error(
+                `Не корректное состояние загрузки настроек пользователя: ${loginStatus}`,
+            );
     }
-}
-
-export default Login;
+};
