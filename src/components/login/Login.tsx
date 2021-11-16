@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 import { ErrorHandler } from '../errorHandler/ErrorHandler';
 import Options from '../options/Options';
 import {
@@ -16,21 +17,25 @@ interface IProp {
 }
 
 export const Login: React.FC<IProp> = props => {
-  const loginStatus = useSelector(state => (state as ILoginState).loginStatus);
-  const userName = useSelector(state => (state as ILoginState).userName);
+    const loginState = useSelector<RootState>(
+        state => state.login,
+    ) as ILoginState;
     const dispatch = useDispatch();
+    const [initialLoginStatus, changeLoginStatus] = useState(
+        loginState.loginStatus,
+    );
 
-    switch (loginStatus) {
+    switch (initialLoginStatus) {
         case LoginProcessEnum.Login:
             return (
                 <div>
                     <span data-testid="login-name">
-                        Пользователь: {userName}
+                        Пользователь: {loginState.userName}
                     </span>
                     <br></br>
                     <ErrorHandler>
                         <Options
-                            userName={userName}
+                            userName={loginState.userName}
                             onChange={props.onChange}
                         />
                     </ErrorHandler>
@@ -39,7 +44,8 @@ export const Login: React.FC<IProp> = props => {
                         data-testid="logout-button"
                         onClick={() => {
                             dispatch(logout);
-                            props.onLoginStatusChange(LoginProcessEnum.Login);
+                            changeLoginStatus(LoginProcessEnum.Logout);
+                            props.onLoginStatusChange(LoginProcessEnum.Logout);
                         }}
                     >
                         Выйти
@@ -53,7 +59,7 @@ export const Login: React.FC<IProp> = props => {
                     <input
                         data-testid="login-input"
                         type="text"
-                        value={userName}
+                        value={loginState.userName}
                         onChange={e => {
                             dispatch(changeUserName(e.target.value));
                         }}
@@ -63,6 +69,8 @@ export const Login: React.FC<IProp> = props => {
                         data-testid="login-button"
                         onClick={() => {
                             dispatch(login);
+                            changeLoginStatus(LoginProcessEnum.Login);
+                            props.onLoginStatusChange(LoginProcessEnum.Login);
                         }}
                     >
                         Войти
@@ -71,7 +79,7 @@ export const Login: React.FC<IProp> = props => {
             );
         default:
             throw Error(
-                `Не корректное состояние загрузки настроек пользователя: ${loginStatus}`,
+                `Не корректное состояние загрузки настроек пользователя: ${loginState.loginStatus}`,
             );
     }
 };
