@@ -16,30 +16,14 @@ export const Grid: React.FC = () => {
     ) as IOptionState;
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     if (optionState.status === OptionsLoadingEnum.Complete) {
-    //         dispatch(
-    //             updateField(
-    //                 optionState.percent > 0
-    //                     ? logic.GenerateRandomState(
-    //                           optionState.rows,
-    //                           optionState.cols,
-    //                           optionState.percent,
-    //                       )
-    //                     : logic.GetNewArray(optionState.rows, optionState.cols),
-    //             ),
-    //         );
-    //     }
-    // });
-
     const grid: ReactElement[] = [];
 
-    for (let i = 1; i < optionState.rows + 1; i++) {
-        for (let j = 1; j < optionState.cols + 1; j++) {
+    for (let i = 0; i < optionState.rows; i++) {
+        for (let j = 0; j < optionState.cols; j++) {
             grid.push(
                 <GridItem
-                    row={i}
-                    col={j}
+                    row={i + 1}
+                    col={j + 1}
                     isActive={gridState.field[i][j] === 1}
                     clickHandler={() => {
                         dispatch(
@@ -50,7 +34,10 @@ export const Grid: React.FC = () => {
                             }),
                         );
                     }}
-                    customStyle={{ gridRowStart: i, gridColumnStart: j }}
+                    customStyle={{
+                        gridRowStart: i + 1,
+                        gridColumnStart: j + 1,
+                    }}
                     key={`${i}-${j}`}
                 />,
             );

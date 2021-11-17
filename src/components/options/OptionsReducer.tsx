@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
     PutOptionsToServer,
     IOption,
-    GetOptionsFromServer,
+    getOptionsFromServer
 } from '../../services/ServerMock';
 import { SpeedEnum } from './speedRegulator/SpeedRegulatorReducer';
 
@@ -19,14 +19,6 @@ export enum OptionsLoadingEnum {
     Complete,
     Error,
 }
-
-export const getOptionsFromServer = createAsyncThunk(
-    'options/GetOptionsFromServer',
-    async (userName: string) => {
-        const response = (await GetOptionsFromServer(userName)) as IOption;
-        return response;
-    },
-);
 
 export const optionSlice = createSlice({
     name: 'login',
@@ -64,7 +56,7 @@ export const optionSlice = createSlice({
         builder.addCase(getOptionsFromServer.rejected, state => {
             state.status = OptionsLoadingEnum.Error;
         });
-    },
+    }
 });
 
 export const { applyOptions, changeOptions } = optionSlice.actions;
