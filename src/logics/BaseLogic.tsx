@@ -2,7 +2,7 @@ export class GameOfLife {
   public CalculateNextState(currentState: number[][]): number[][] {
     const rows = currentState.length;
     const cols = currentState[0].length;
-    let newState = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
+    let newState = this.GetNewArray(rows, cols);
 
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
@@ -32,6 +32,10 @@ export class GameOfLife {
       }
     }
     return newState;
+  }
+
+  public GetNewArray(rows: number, cols: number) {
+    return new Array(rows).fill(0).map(() => new Array(cols).fill(0));
   }
 
   public GenerateRandomState(rows:number, cols:number, percent: number): number[][] {

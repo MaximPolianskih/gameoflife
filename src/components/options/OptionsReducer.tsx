@@ -40,17 +40,11 @@ export const optionSlice = createSlice({
     reducers: {
         applyOptions: (state, { payload }: PayloadAction<string>) => {
             PutOptionsToServer(payload, {
-                rows: state.rows,
-                cols: state.cols,
-                percent: state.percent,
-                speed: state.speed,
+                ...state
             } as IOption);
         },
         changeOptions: (state, { payload }) => {
-            state.cols = payload.cols;
-            state.rows = payload.rows;
-            state.percent = payload.percent;
-            state.speed = payload.speed;
+          return {...state, ...payload}
         },
     },
     extraReducers: builder => {
@@ -60,11 +54,11 @@ export const optionSlice = createSlice({
         builder.addCase(
             getOptionsFromServer.fulfilled,
             (state, { payload }) => {
-                state.status = OptionsLoadingEnum.Complete;
-                state.cols = payload.cols;
-                state.rows = payload.rows;
-                state.percent = payload.percent;
-                state.speed = payload.speed;
+              return {
+                  ...state,
+                  ...payload,
+                  status: OptionsLoadingEnum.Complete,
+              };
             },
         );
         builder.addCase(getOptionsFromServer.rejected, state => {

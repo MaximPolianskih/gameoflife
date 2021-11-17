@@ -1,7 +1,8 @@
 import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Login, { LoginProcessEnum } from './Login';
+import { Login } from './Login';
+import { LoginProcessEnum } from './LoginReducer';
 
 afterEach(cleanup);
 

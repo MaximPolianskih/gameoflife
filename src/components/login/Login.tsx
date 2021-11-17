@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { ErrorHandler } from '../errorHandler/ErrorHandler';
-import Options from '../options/Options';
+import { Options } from '../options/Options';
 import {
     changeUserName,
     ILoginState,
@@ -11,21 +11,13 @@ import {
     logout,
 } from './LoginReducer';
 
-interface IProp {
-    onChange: (row: number, col: number) => void;
-    onLoginStatusChange: (loginStatus: LoginProcessEnum) => void;
-}
-
-export const Login: React.FC<IProp> = props => {
+export const Login: React.FC = props => {
     const loginState = useSelector<RootState>(
         state => state.login,
     ) as ILoginState;
     const dispatch = useDispatch();
-    const [initialLoginStatus, changeLoginStatus] = useState(
-        loginState.loginStatus,
-    );
 
-    switch (initialLoginStatus) {
+    switch (loginState.loginStatus) {
         case LoginProcessEnum.Login:
             return (
                 <div>
@@ -34,18 +26,13 @@ export const Login: React.FC<IProp> = props => {
                     </span>
                     <br></br>
                     <ErrorHandler>
-                        <Options
-                            userName={loginState.userName}
-                            onChange={props.onChange}
-                        />
+                        <Options />
                     </ErrorHandler>
                     <br></br>
                     <button
                         data-testid="logout-button"
                         onClick={() => {
-                            dispatch(logout);
-                            changeLoginStatus(LoginProcessEnum.Logout);
-                            props.onLoginStatusChange(LoginProcessEnum.Logout);
+                            dispatch(logout());
                         }}
                     >
                         Выйти
@@ -68,9 +55,7 @@ export const Login: React.FC<IProp> = props => {
                     <button
                         data-testid="login-button"
                         onClick={() => {
-                            dispatch(login);
-                            changeLoginStatus(LoginProcessEnum.Login);
-                            props.onLoginStatusChange(LoginProcessEnum.Login);
+                            dispatch(login());
                         }}
                     >
                         Войти
