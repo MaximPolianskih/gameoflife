@@ -26,7 +26,7 @@ export const optionSlice = createSlice({
         rows: 0,
         cols: 0,
         percent: 0,
-        speed: SpeedEnum.Slow,
+        speed: SpeedEnum.Fast,
         status: OptionsLoadingEnum.Loading,
     } as IOptionState,
     reducers: {

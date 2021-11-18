@@ -1,17 +1,14 @@
 import cn from 'classnames';
 import Grid from './components/grid/Grid';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Login } from './components/login/Login';
 import GameMenu from './components/gameMenu/GameMenu';
 import { ILoginState, LoginProcessEnum } from './components/login/LoginReducer';
 import { RootState } from './store/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { cleanup } from '@testing-library/react';
-import { updateField } from './components/grid/GridReducer';
 import { GameOfLife } from './logics/BaseLogic';
 import {
     IOptionState,
-    OptionsLoadingEnum,
 } from './components/options/OptionsReducer';
 
 export const App: React.FC = () => {

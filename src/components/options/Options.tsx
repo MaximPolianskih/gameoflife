@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GameOfLife } from '../../logics/BaseLogic';
 import { getOptionsFromServer } from '../../services/ServerMock';
 import { RootState } from '../../store/store';
-import { updateField } from '../grid/GridReducer';
+import { generateField } from '../grid/GridReducer';
 import { ILoginState } from '../login/LoginReducer';
 import {
     IOptionState,
@@ -28,20 +28,6 @@ export const Options: React.FC = props => {
             dispatch(getOptionsFromServer(loginState.userName));
         }
     });
-
-    const dispatchNewField = (newState: IOptionState) => {
-        dispatch(
-            updateField(
-                newState.percent > 0
-                    ? logic.GenerateRandomState(
-                          newState.rows,
-                          newState.cols,
-                          newState.percent,
-                      )
-                    : logic.GetNewArray(newState.rows, newState.cols),
-            ),
-        );
-    };
 
     if (optionState.status == OptionsLoadingEnum.Loading) {
         return (
@@ -71,7 +57,7 @@ export const Options: React.FC = props => {
                     const num = parseInt(e.target.value, 10);
                     if (!isNaN(num)) {
                         dispatch(changeOptions({ rows: num }));
-                        dispatchNewField({ ...optionState, rows: num });
+                        dispatch(generateField({ ...optionState, rows: num }));
                     }
                 }}
             />
@@ -84,8 +70,8 @@ export const Options: React.FC = props => {
                 onChange={e => {
                     const num = parseInt(e.target.value, 10);
                     if (!isNaN(num)) {
-                        dispatch(changeOptions({ cols: num }));
-                        dispatchNewField({ ...optionState, cols: num });
+                      dispatch(changeOptions({ cols: num }));
+                      dispatch(generateField({ ...optionState, cols: num }));
                     }
                 }}
             />
@@ -99,7 +85,9 @@ export const Options: React.FC = props => {
                     const num = parseInt(e.target.value, 10);
                     if (!isNaN(num)) {
                         dispatch(changeOptions({ percent: num }));
-                        dispatchNewField({ ...optionState, percent: num });
+                        dispatch(
+                            generateField({ ...optionState, percent: num }),
+                        );
                     }
                 }}
             />

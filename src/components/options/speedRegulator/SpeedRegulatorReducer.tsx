@@ -5,7 +5,7 @@ export enum SpeedEnum {
     Medium = 4,
     Fast = 8
 }
-
+//TODO
 export const optionSlice = createSlice({
     name: 'login',
     initialState: {

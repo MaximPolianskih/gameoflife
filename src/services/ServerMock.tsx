@@ -16,7 +16,7 @@ async function GetOptionsFromServer(userName: string) {
   return (
       options
           ? JSON.parse(options)
-          : { rows: 10, cols: 10, percent: 0, speed: SpeedEnum.Slow }
+          : { rows: 10, cols: 10, percent: 0, speed: SpeedEnum.Fast }
   ) as IOption;
 }
 

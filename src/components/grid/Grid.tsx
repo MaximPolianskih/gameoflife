@@ -1,12 +1,11 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
 import cn from 'classnames';
 import GridItem from './gridItem/GridItem';
 import './grid.css';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { IGridState, setCellActivity, updateField } from './GridReducer';
-import { GameOfLife } from '../../logics/BaseLogic';
+import { IGridState, setCellActivity } from './GridReducer';
 import { IOptionState } from '../options/OptionsReducer';
 
 export const Grid: React.FC = () => {
@@ -22,9 +21,8 @@ export const Grid: React.FC = () => {
         for (let j = 0; j < optionState.cols; j++) {
             grid.push(
                 <GridItem
-                    row={i + 1}
-                    col={j + 1}
-                    isActive={gridState.field[i][j] === 1}
+                    row={i}
+                    col={j}
                     clickHandler={() => {
                         dispatch(
                             setCellActivity({

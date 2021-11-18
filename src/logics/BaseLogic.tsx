@@ -38,7 +38,8 @@ export class GameOfLife {
     return new Array(rows).fill(0).map(() => new Array(cols).fill(0));
   }
 
-  public GenerateRandomState(rows:number, cols:number, percent: number): number[][] {
+  public GenerateRandomState(rows: number, cols: number, percent: number): number[][] {
+    percent = percent > 100 ? 100 : percent;
     const aliveFields = Math.round(rows * cols * percent / 100);
     let resultField: number[][] = new Array(rows)
         .fill(0)

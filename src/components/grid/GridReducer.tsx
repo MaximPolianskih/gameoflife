@@ -1,11 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GameOfLife } from '../../logics/BaseLogic';
-import { getOptionsFromServer } from '../../services/ServerMock';
+import { getOptionsFromServer, IOption } from '../../services/ServerMock';
 
 export interface IGridState {
-  field: number[][]
+    field: number[][];
 }
 const logic = new GameOfLife();
+export const SetNewField = (state: IGridState, payload: IOption) => {
+    state.field =
+        payload.percent > 0
+            ? logic.GenerateRandomState(
+                  payload.rows,
+                  payload.cols,
+                  payload.percent,
+              )
+            : logic.GetNewArray(payload.rows, payload.cols);
+};
 
 export const gridSlice = createSlice({
     name: 'grid',
@@ -13,9 +23,11 @@ export const gridSlice = createSlice({
         field: [[]],
     } as IGridState,
     reducers: {
-        updateField: (state, { payload }: PayloadAction<number[][]>) => {
-            state.field = payload;
+        nextIteration: state => {
+            state.field = logic.CalculateNextState(state.field);
         },
+        generateField: (state, { payload }: PayloadAction<IOption>) =>
+            SetNewField(state, payload),
         setCellActivity: (
             state,
             {
@@ -30,21 +42,11 @@ export const gridSlice = createSlice({
         },
     },
     extraReducers: builder => {
-        builder.addCase(
-            getOptionsFromServer.fulfilled,
-            (state, { payload }) => {
-                state.field =
-                    payload.percent > 0
-                        ? logic.GenerateRandomState(
-                              payload.rows,
-                              payload.cols,
-                              payload.percent,
-                          )
-                        : logic.GetNewArray(payload.rows, payload.cols);
-            },
+        builder.addCase(getOptionsFromServer.fulfilled, (state, { payload }) =>
+            SetNewField(state, payload),
         );
     },
 });
 
-export const { updateField, setCellActivity } = gridSlice.actions;
+export const { nextIteration, generateField, setCellActivity } = gridSlice.actions;
 export default gridSlice.reducer;
