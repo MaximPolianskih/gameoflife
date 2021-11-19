@@ -1,17 +1,38 @@
+import React from 'react';
 import cn from 'classnames';
-import React, { useState } from 'react';
-import { SpeedEnum } from './SpeedRegulatorReducer';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
+import { IOptionState } from '../OptionsReducer';
+
+export enum SpeedEnum {
+    Slow = 2,
+    Medium = 16,
+    Fast = 128,
+}
+
+function GetSpeedName(speed: SpeedEnum) {
+    switch (speed) {
+        case SpeedEnum.Fast:
+            return 'Быстрая';
+        case SpeedEnum.Medium:
+            return 'Средняя';
+        case SpeedEnum.Slow:
+            return 'Медленная';
+    }
+}
 
 interface ISpeedRegulator {
     clickHandler: (speed: number) => void;
 }
 
 function SpeedRegulator({ clickHandler }: ISpeedRegulator) {
+    const optionState = useSelector<RootState>(
+        state => state.option,
+    ) as IOptionState;
+
     return (
         <div className={cn(SpeedRegulator.name)}>
-            <label>
-                Скорость анимации: {'Низкая' /*TODO использовать stase*/}
-            </label>
+            <label>Скорость анимации: {GetSpeedName(optionState.speed)}</label>
             <br></br>
             <button
                 onClick={() => clickHandler(SpeedEnum.Slow)}

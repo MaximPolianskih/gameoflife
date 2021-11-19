@@ -10,6 +10,5 @@ export default {
 const Template: ComponentStory<typeof Grid> = args => <Grid {...args} />;
 export const Default = Template.bind({});
 Default.args = {
-  rows:10,
-  cols: 10
+
 };

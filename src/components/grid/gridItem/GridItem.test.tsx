@@ -5,7 +5,7 @@ import GridItem from './GridItem';
 describe('GridItem', () => {
   test('renders GridItem component', () => {
     const result = render(
-      <GridItem col={0} row={0} isActive={false} clickHandler={() => {}} />
+      <GridItem col={0} row={0} clickHandler={() => {}} />
     );
     expect(result.container.querySelector('.GridItem')).toBeInTheDocument();
   });

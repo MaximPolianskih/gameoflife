@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getOptionsFromServer } from '../../services/ServerMock';
+import { createSlice } from '@reduxjs/toolkit';
 
 export interface IGameMenuState {
     isGameRunning: boolean;

@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { CSSProperties, useState } from 'react';
+import {CSSProperties, useCallback, useEffect, useRef, useState} from 'react';
 import './grid-item.css';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -28,7 +28,7 @@ export const GridItem: React.FC<IGridItem> = props => {
                 ...props.customStyle,
                 ...(gridState.field[props.row][props.col] === 1
                     ? { backgroundColor: 'green' }
-                    : { backgroundColor: 'black' }),
+                    : { backgroundColor: 'white' }),
             }}
             onClick={() => {
                 props.clickHandler && props.clickHandler(props.col, props.row);

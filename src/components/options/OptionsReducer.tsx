@@ -1,10 +1,10 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getOptionsFromServer } from '../../actions/Actions';
 import {
     PutOptionsToServer,
-    IOption,
-    getOptionsFromServer
+    IOption
 } from '../../services/ServerMock';
-import { SpeedEnum } from './speedRegulator/SpeedRegulatorReducer';
+import { SpeedEnum } from './speedRegulator/SpeedRegulator';
 
 export interface IOptionState {
     rows: number;
@@ -21,7 +21,7 @@ export enum OptionsLoadingEnum {
 }
 
 export const optionSlice = createSlice({
-    name: 'login',
+    name: 'options',
     initialState: {
         rows: 0,
         cols: 0,
@@ -32,11 +32,11 @@ export const optionSlice = createSlice({
     reducers: {
         applyOptions: (state, { payload }: PayloadAction<string>) => {
             PutOptionsToServer(payload, {
-                ...state
+                ...state,
             } as IOption);
         },
         changeOptions: (state, { payload }) => {
-          return {...state, ...payload}
+            return { ...state, ...payload };
         },
     },
     extraReducers: builder => {
@@ -46,17 +46,17 @@ export const optionSlice = createSlice({
         builder.addCase(
             getOptionsFromServer.fulfilled,
             (state, { payload }) => {
-              return {
-                  ...state,
-                  ...payload,
-                  status: OptionsLoadingEnum.Complete,
-              };
+                return {
+                    ...state,
+                    ...payload,
+                    status: OptionsLoadingEnum.Complete,
+                };
             },
         );
         builder.addCase(getOptionsFromServer.rejected, state => {
             state.status = OptionsLoadingEnum.Error;
         });
-    }
+    },
 });
 
 export const { applyOptions, changeOptions } = optionSlice.actions;

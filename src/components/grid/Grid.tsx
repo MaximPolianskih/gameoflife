@@ -28,7 +28,7 @@ export const Grid: React.FC = () => {
                             setCellActivity({
                                 row: i,
                                 col: j,
-                                isActive: gridState.field[i][j] === 1,
+                                isActive: gridState.field[i][j] === 0,
                             }),
                         );
                     }}

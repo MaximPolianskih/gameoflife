@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GameOfLife } from '../../logics/BaseLogic';
-import { getOptionsFromServer } from '../../services/ServerMock';
+import { getOptionsFromServer } from '../../actions/Actions';
 import { RootState } from '../../store/store';
 import { generateField } from '../grid/GridReducer';
 import { ILoginState } from '../login/LoginReducer';
