@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 import SpeedRegulator from './SpeedRegulator';
 
 export default {
@@ -12,5 +12,6 @@ const Template: ComponentStory<typeof SpeedRegulator> = args => (
 );
 export const Default = Template.bind({});
 Default.args = {
-    clickHandler: (speed: number) => {},
+    clickHandler: (speed: number) => {
+    },
 };

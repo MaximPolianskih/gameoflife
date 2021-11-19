@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import GameMenuReducer from '../components/gameMenu/GameMenuReducer';
 import GridReducer from '../components/grid/GridReducer';

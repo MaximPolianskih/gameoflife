@@ -1,16 +1,11 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { GameOfLife } from '../../logics/BaseLogic';
-import { getOptionsFromServer } from '../../actions/Actions';
-import { RootState } from '../../store/store';
-import { generateField } from '../grid/GridReducer';
-import { ILoginState } from '../login/LoginReducer';
-import {
-    IOptionState,
-    changeOptions,
-    applyOptions,
-    OptionsLoadingEnum,
-} from './OptionsReducer';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {GameOfLife} from '../../logics/BaseLogic';
+import {getOptionsFromServer} from '../../actions/Actions';
+import {RootState} from '../../store/store';
+import {generateField} from '../grid/GridReducer';
+import {ILoginState} from '../login/LoginReducer';
+import {applyOptions, changeOptions, IOptionState, OptionsLoadingEnum,} from './OptionsReducer';
 import SpeedRegulator from './speedRegulator/SpeedRegulator';
 
 export const Options: React.FC = props => {
@@ -56,8 +51,8 @@ export const Options: React.FC = props => {
                 onChange={e => {
                     const num = parseInt(e.target.value, 10);
                     if (!isNaN(num)) {
-                        dispatch(changeOptions({ rows: num }));
-                        dispatch(generateField({ ...optionState, rows: num }));
+                        dispatch(changeOptions({rows: num}));
+                        dispatch(generateField({...optionState, rows: num}));
                     }
                 }}
             />
@@ -70,8 +65,8 @@ export const Options: React.FC = props => {
                 onChange={e => {
                     const num = parseInt(e.target.value, 10);
                     if (!isNaN(num)) {
-                      dispatch(changeOptions({ cols: num }));
-                      dispatch(generateField({ ...optionState, cols: num }));
+                        dispatch(changeOptions({cols: num}));
+                        dispatch(generateField({...optionState, cols: num}));
                     }
                 }}
             />
@@ -84,9 +79,9 @@ export const Options: React.FC = props => {
                 onChange={e => {
                     const num = parseInt(e.target.value, 10);
                     if (!isNaN(num)) {
-                        dispatch(changeOptions({ percent: num }));
+                        dispatch(changeOptions({percent: num}));
                         dispatch(
-                            generateField({ ...optionState, percent: num }),
+                            generateField({...optionState, percent: num}),
                         );
                     }
                 }}
@@ -94,7 +89,7 @@ export const Options: React.FC = props => {
             <br></br>
             <SpeedRegulator
                 clickHandler={(speed: number) => {
-                    dispatch(changeOptions({ speed: speed }));
+                    dispatch(changeOptions({speed: speed}));
                 }}
             />
             <br></br>

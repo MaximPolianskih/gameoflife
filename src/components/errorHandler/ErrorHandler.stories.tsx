@@ -1,19 +1,18 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ErrorHandler } from './ErrorHandler';
-import { render } from '@testing-library/react';
+import {ComponentMeta} from '@storybook/react';
+import {ErrorHandler} from './ErrorHandler';
 
 export default {
-  title: 'GameOfLife/ErrorHandler',
-  component: ErrorHandler,
+    title: 'GameOfLife/ErrorHandler',
+    component: ErrorHandler,
 } as ComponentMeta<typeof ErrorHandler>;
 
 interface IState {
-  isClicked: boolean  
+    isClicked: boolean
 }
 
 class WrappedComponent extends React.Component<{}, IState> {
-    state = { isClicked: false };
+    state = {isClicked: false};
 
     render() {
         if (this.state.isClicked) {
@@ -22,7 +21,7 @@ class WrappedComponent extends React.Component<{}, IState> {
         return (
             <button
                 onClick={() => {
-                    this.setState({ isClicked: true });
+                    this.setState({isClicked: true});
                 }}
             >
                 Нажать для вызова ошибки
@@ -32,7 +31,7 @@ class WrappedComponent extends React.Component<{}, IState> {
 }
 
 export const Default = () => (
-  <ErrorHandler>
-    <WrappedComponent />
-  </ErrorHandler>
+    <ErrorHandler>
+        <WrappedComponent/>
+    </ErrorHandler>
 );

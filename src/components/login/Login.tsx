@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { ErrorHandler } from '../errorHandler/ErrorHandler';
-import { Options } from '../options/Options';
-import {
-    changeUserName,
-    ILoginState,
-    login,
-    LoginProcessEnum,
-    logout,
-} from './LoginReducer';
+import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import {ErrorHandler} from '../errorHandler/ErrorHandler';
+import {Options} from '../options/Options';
+import {changeUserName, ILoginState, login, LoginProcessEnum, logout,} from './LoginReducer';
 
 export const Login: React.FC = props => {
     const loginState = useSelector<RootState>(
@@ -26,7 +20,7 @@ export const Login: React.FC = props => {
                     </span>
                     <br></br>
                     <ErrorHandler>
-                        <Options />
+                        <Options/>
                     </ErrorHandler>
                     <br></br>
                     <button

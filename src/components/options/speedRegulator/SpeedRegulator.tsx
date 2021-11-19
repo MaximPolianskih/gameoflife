@@ -1,8 +1,8 @@
 import React from 'react';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
-import { IOptionState } from '../OptionsReducer';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../../store/store';
+import {IOptionState} from '../OptionsReducer';
 
 export enum SpeedEnum {
     Slow = 2,
@@ -25,7 +25,7 @@ interface ISpeedRegulator {
     clickHandler: (speed: number) => void;
 }
 
-function SpeedRegulator({ clickHandler }: ISpeedRegulator) {
+function SpeedRegulator({clickHandler}: ISpeedRegulator) {
     const optionState = useSelector<RootState>(
         state => state.option,
     ) as IOptionState;

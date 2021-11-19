@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef} from "react";
 import {nextIteration} from "../grid/GridReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";

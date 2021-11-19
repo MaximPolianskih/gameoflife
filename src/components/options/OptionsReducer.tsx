@@ -1,10 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getOptionsFromServer } from '../../actions/Actions';
-import {
-    PutOptionsToServer,
-    IOption
-} from '../../services/ServerMock';
-import { SpeedEnum } from './speedRegulator/SpeedRegulator';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {getOptionsFromServer} from '../../actions/Actions';
+import {IOption, PutOptionsToServer} from '../../services/ServerMock';
+import {SpeedEnum} from './speedRegulator/SpeedRegulator';
 
 export interface IOptionState {
     rows: number;
@@ -30,13 +27,13 @@ export const optionSlice = createSlice({
         status: OptionsLoadingEnum.Loading,
     } as IOptionState,
     reducers: {
-        applyOptions: (state, { payload }: PayloadAction<string>) => {
+        applyOptions: (state, {payload}: PayloadAction<string>) => {
             PutOptionsToServer(payload, {
                 ...state,
             } as IOption);
         },
-        changeOptions: (state, { payload }) => {
-            return { ...state, ...payload };
+        changeOptions: (state, {payload}) => {
+            return {...state, ...payload};
         },
     },
     extraReducers: builder => {
@@ -45,7 +42,7 @@ export const optionSlice = createSlice({
         });
         builder.addCase(
             getOptionsFromServer.fulfilled,
-            (state, { payload }) => {
+            (state, {payload}) => {
                 return {
                     ...state,
                     ...payload,
@@ -59,5 +56,5 @@ export const optionSlice = createSlice({
     },
 });
 
-export const { applyOptions, changeOptions } = optionSlice.actions;
+export const {applyOptions, changeOptions} = optionSlice.actions;
 export default optionSlice.reducer;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 import GridItem from './GridItem';
 
 export default {
@@ -14,11 +14,11 @@ const Template: ComponentStory<typeof GridItem> = args => (
 export const Default = Template.bind({});
 Default.args = {
     isActive: false,
-    customStyle: { width: 10, height: 10 },
+    customStyle: {width: 10, height: 10},
 };
 
 export const Active = Template.bind({});
 Active.args = {
     isActive: true,
-    customStyle: { width: 10, height: 10 },
+    customStyle: {width: 10, height: 10},
 };

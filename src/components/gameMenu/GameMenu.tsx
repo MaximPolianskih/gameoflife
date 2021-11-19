@@ -1,10 +1,10 @@
 import cn from 'classnames';
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store/store';
-import { generateField } from '../grid/GridReducer';
-import { IOptionState } from '../options/OptionsReducer';
-import { IGameMenuState, startGame, stopGame } from './GameMenuReducer';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import {generateField} from '../grid/GridReducer';
+import {IOptionState} from '../options/OptionsReducer';
+import {IGameMenuState, startGame, stopGame} from './GameMenuReducer';
 
 export const GameMenu: React.FC = () => {
     const optionState = useSelector<RootState>(
