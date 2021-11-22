@@ -7,6 +7,8 @@ import {generateField} from '../grid/GridReducer';
 import {ILoginState} from '../login/LoginReducer';
 import {applyOptions, changeOptions, IOptionState, OptionsLoadingEnum,} from './OptionsReducer';
 import SpeedRegulator from './speedRegulator/SpeedRegulator';
+import './options.css'
+import cn from "classnames";
 
 export const Options: React.FC = props => {
     const optionState = useSelector<RootState>(
@@ -26,9 +28,12 @@ export const Options: React.FC = props => {
 
     if (optionState.status == OptionsLoadingEnum.Loading) {
         return (
-            <label data-testid="options-loader-lebel">
-                Настройки пользователя {loginState.userName} загружаются...
-            </label>
+            <div>
+                <br></br>
+                <label data-testid="options-loader-lebel">
+                    Настройки пользователя {loginState.userName} загружаются...
+                </label>
+            </div>
         );
     }
 
@@ -41,8 +46,8 @@ export const Options: React.FC = props => {
     }
 
     return (
-        <div>
-            <br></br>
+
+        <div className={cn(Options.name)}>
             <label>Количество строк:</label>
             <input
                 data-testid="options-input-rows"
@@ -56,7 +61,6 @@ export const Options: React.FC = props => {
                     }
                 }}
             />
-            <br></br>
             <label>Количество столбцов:</label>
             <input
                 data-testid="options-input-cols"
@@ -70,7 +74,6 @@ export const Options: React.FC = props => {
                     }
                 }}
             />
-            <br></br>
             <label>Процент заполнености поля:</label>
             <input
                 data-testid="options-input-percent"
@@ -86,13 +89,11 @@ export const Options: React.FC = props => {
                     }
                 }}
             />
-            <br></br>
             <SpeedRegulator
                 clickHandler={(speed: number) => {
                     dispatch(changeOptions({speed: speed}));
                 }}
             />
-            <br></br>
             <button
                 data-testid="options-change-button"
                 onClick={() => dispatch(applyOptions(loginState.userName))}

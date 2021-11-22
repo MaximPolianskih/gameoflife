@@ -33,24 +33,25 @@ function SpeedRegulator({clickHandler}: ISpeedRegulator) {
     return (
         <div className={cn(SpeedRegulator.name)}>
             <label>Скорость анимации: {GetSpeedName(optionState.speed)}</label>
-            <br></br>
             <button
+                style={{marginRight: 5, marginTop: 5}}
                 onClick={() => clickHandler(SpeedEnum.Slow)}
                 data-testid={'speed-regulator-button-low'}
             >
-                Низкая
+                {GetSpeedName(SpeedEnum.Slow)}
             </button>
             <button
+                style={{marginRight: 5}}
                 onClick={() => clickHandler(SpeedEnum.Medium)}
                 data-testid={'speed-regulator-button-medium'}
             >
-                Средняя
+                {GetSpeedName(SpeedEnum.Medium)}
             </button>
             <button
                 onClick={() => clickHandler(SpeedEnum.Fast)}
                 data-testid={'speed-regulator-button-hight'}
             >
-                Высокая
+                {GetSpeedName(SpeedEnum.Fast)}
             </button>
         </div>
     );

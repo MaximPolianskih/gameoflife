@@ -7,6 +7,7 @@ import {ILoginState, LoginProcessEnum} from './components/login/LoginReducer';
 import {RootState} from './store/store';
 import {useSelector} from 'react-redux';
 import {gameLoop} from './components/gameLoop/GameLoop';
+import './app.css';
 
 export const App: React.FC = () => {
     const loginState = useSelector<RootState>(
@@ -32,7 +33,6 @@ export const App: React.FC = () => {
 
     return (
         <div className={cn(App.name)}>
-            <label>Game of life</label>
             <Login/>
         </div>
     );

@@ -18,12 +18,8 @@ export const Login: React.FC = props => {
                     <span data-testid="login-name">
                         Пользователь: {loginState.userName}
                     </span>
-                    <br></br>
-                    <ErrorHandler>
-                        <Options/>
-                    </ErrorHandler>
-                    <br></br>
                     <button
+                        style={{margin: 10}}
                         data-testid="logout-button"
                         onClick={() => {
                             dispatch(logout());
@@ -31,6 +27,9 @@ export const Login: React.FC = props => {
                     >
                         Выйти
                     </button>
+                    <ErrorHandler>
+                        <Options/>
+                    </ErrorHandler>
                 </div>
             );
         case LoginProcessEnum.Logout:
@@ -38,6 +37,7 @@ export const Login: React.FC = props => {
                 <div>
                     <label>Введите имя пользователя:</label>
                     <input
+                        style={{margin: 10}}
                         data-testid="login-input"
                         type="text"
                         value={loginState.userName}
@@ -45,7 +45,6 @@ export const Login: React.FC = props => {
                             dispatch(changeUserName(e.target.value));
                         }}
                     />
-                    <br></br>
                     <button
                         data-testid="login-button"
                         onClick={() => {

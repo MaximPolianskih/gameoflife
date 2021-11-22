@@ -1,0 +1,12 @@
+.Options {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 2.7fr 0.3fr;
+    grid-template-rows: 0.3fr 0.3fr 0.3fr 0.3fr;
+    gap: 10px 10px;
+    grid-template-areas:
+            ". ."
+            ". ."
+            ". ."
+            ". .";
+}

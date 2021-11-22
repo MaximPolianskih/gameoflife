@@ -42,10 +42,8 @@ export const Grid: React.FC = () => {
     }
 
     return (
-        <div className="MainField">
-            <div className={cn(Grid.name)} role={cn(Grid.name)}>
-                {grid}
-            </div>
+        <div className={cn(Grid.name)} role={cn(Grid.name)}>
+            {grid}
         </div>
     );
 };
