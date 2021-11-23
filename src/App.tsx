@@ -1,56 +1,42 @@
 import cn from 'classnames';
 import Grid from './components/grid/Grid';
-import React, { useState } from 'react';
-import Login, { LoginProcessEnum } from './components/login/Login';
-import GameMenu from './components/gameMenu/gameMenu';
+import React from 'react';
+import {Login} from './components/login/Login';
+import GameMenu from './components/gameMenu/GameMenu';
+import {ILoginState, LoginProcessEnum} from './components/login/LoginReducer';
+import {RootState} from './store/store';
+import {useSelector} from 'react-redux';
+import {gameLoop} from './components/gameLoop/GameLoop';
+import './app.css';
 
-function App() {
-    const [currentState, setState] = useState({
-        rows: 0,
-        cols: 0,
-        loginStatus: LoginProcessEnum.Logout,
-    });
-    const onFieldSizeHandler = (rows: number, cols: number): void =>
-        setState(prevState => {
-            return {
-                ...prevState,
-                rows,
-                cols,
-            };
-        });
+export const App: React.FC = () => {
+    const loginState = useSelector<RootState>(
+        state => state.login,
+    ) as ILoginState;
 
-    const onLoginStatusChangeHandler = (loginStatus: LoginProcessEnum): void =>
-        setState(prevState => {
-            return {
-                ...prevState,
-                loginStatus,
-            };
-        });
+    gameLoop();
 
-    if (currentState.loginStatus === LoginProcessEnum.Login) {
+    if (loginState.loginStatus === LoginProcessEnum.Login) {
         return (
             <div className={cn(App.name)}>
-                <label>Game of life</label>
-                <Login
-                    onChange={onFieldSizeHandler}
-                    onLoginStatusChange={onLoginStatusChangeHandler}
-                />
-                <br></br>
-                <GameMenu />
-                <br></br>
-                <Grid rows={currentState.rows} cols={currentState.cols} />
+                <div>
+                    <Login/>
+                </div>
+                <div>
+                    <GameMenu/>
+                    <br></br>
+                    <Grid/>
+                </div>
             </div>
         );
     }
+
     return (
         <div className={cn(App.name)}>
-            <label>Game of life</label>
-            <Login
-                onChange={onFieldSizeHandler}
-                onLoginStatusChange={onLoginStatusChangeHandler}
-            />
+            <Login/>
         </div>
     );
-}
+};
 
 export default App;
+

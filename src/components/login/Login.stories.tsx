@@ -1,15 +1,19 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Login, { LoginProcessEnum } from './Login';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Login} from './Login';
+import {Provider} from 'react-redux';
+import {store} from '../../store/store';
 
 export default {
-  title: 'GameOfLife/Login',
-  component: Login,
+    title: 'GameOfLife/Login',
+    component: Login,
 } as ComponentMeta<typeof Login>;
 
-const Template: ComponentStory<typeof Login> = args => <Login {...args} />;
+const Template: ComponentStory<typeof Login> = args => (
+    <Provider store={store}>
+        <Login {...args} />
+    </Provider>
+);
+
 export const Default = Template.bind({});
-Default.args = {
-  onChange: (row: number, col: number) => { },
-  onLoginStatusChange: (loginStatus: LoginProcessEnum) => { }
-};
+Default.args = {};

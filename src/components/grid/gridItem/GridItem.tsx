@@ -1,45 +1,46 @@
 import cn from 'classnames';
-import { CSSProperties, useState } from 'react';
+import React, {CSSProperties} from 'react';
 import './grid-item.css';
-import React from 'react';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../../store/store';
+import {IGridState} from '../GridReducer';
 
 interface IGridItem {
-  col: number;
-  row: number;
-  isActive: boolean;
-  clickHandler: (row: number, col: number) => void;
-  customStyle?: CSSProperties;
+    col: number;
+    row: number;
+    clickHandler: (row: number, col: number) => void;
+    customStyle?: CSSProperties;
 }
 
-function GridItem({
-  col = 0,
-  row = 0,
-  isActive = false,
-  clickHandler,
-  customStyle,
-}: IGridItem) {
-  const [gridItemState, isActiveSetter] = useState({
-    isActive: isActive,
-    col: col,
-    row: row,
-  });
-  return (
-    <div
-      className={cn(GridItem.name)}
-      role={cn(GridItem.name)}
-      style={{
-        ...customStyle,
-        ...(gridItemState.isActive
-          ? { backgroundColor: 'green' }
-          : { backgroundColor: 'black' }),
-      }}
-      onClick={() => {
-        clickHandler && clickHandler(col, row);
-        isActiveSetter({ isActive: !gridItemState.isActive, col, row });
-      }}
-    >
-    </div>
-  );
-}
+export const GridItem: React.FC<IGridItem> = props => {
+    const gridState = useSelector<RootState>(state => state.grid) as IGridState;
 
+    return (
+        <div
+            className={cn(GridItem.name)}
+            role={cn(GridItem.name)}
+            style={{
+                ...(isActive(gridState, props.row, props.col)
+                    ? {backgroundColor: `rgb(0, ${255 - 10 * gridState.field[props.row][props.col]}, 0)`}
+                    : {backgroundColor: 'white'}),
+                ...props.customStyle
+            }}
+            onClick={() => {
+                props.clickHandler && props.clickHandler(props.col, props.row);
+            }}
+        ></div>
+    );
+};
+
+const isActive = (state: IGridState, row: number, col: number): boolean => {
+    if (!state) {
+        return false;
+    }
+    if(state.field.length <= row || state.field[0].length <= col)
+    {
+        return false;
+    }
+
+    return state.field[row][col] >= 1;
+}
 export default GridItem;

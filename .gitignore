@@ -28,3 +28,7 @@ yarn-error.log*
 /storybook-static
 .idea/
 .vscode/
+
+# stryker temp files
+.stryker-tmp
+reports/
