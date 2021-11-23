@@ -6,26 +6,18 @@ export class GameOfLife {
 
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
-                let neighborCount = currentState[this.GetIndex(i - 1, rows)][this.GetIndex(j - 1, cols)];
-                neighborCount += currentState[this.GetIndex(i - 1, rows)][this.GetIndex(j, cols)];
-                neighborCount += currentState[this.GetIndex(i - 1, rows)][this.GetIndex(j + 1, cols)];
-                neighborCount += currentState[this.GetIndex(i, rows)][this.GetIndex(j - 1, cols)];
-                neighborCount += currentState[this.GetIndex(i, rows)][this.GetIndex(j + 1, cols)];
-                neighborCount += currentState[this.GetIndex(i + 1, rows)][this.GetIndex(j - 1, cols)];
-                neighborCount += currentState[this.GetIndex(i + 1, rows)][this.GetIndex(j, cols)];
-                neighborCount += currentState[this.GetIndex(i + 1, rows)][this.GetIndex(j + 1, cols)];
+                let neighborCount = this.GetNeihborCount(currentState, i, rows, j, cols);
 
                 if (currentState[i][j] === 0 && neighborCount === 3) {
                     newState[i][j] = 1;
                     continue;
                 }
 
-                if (
-                    currentState[i][j] === 1 &&
-                    neighborCount >= 2 &&
-                    neighborCount <= 3
+                if (currentState[i][j] >= 1
+                    && neighborCount >= 2
+                    && neighborCount <= 3
                 ) {
-                    newState[i][j] = 1;
+                    newState[i][j] = currentState[i][j] + 1;
                 } else {
                     newState[i][j] = 0;
                 }
@@ -44,7 +36,6 @@ export class GameOfLife {
         let resultField: number[][] = new Array(rows)
             .fill(0)
             .map(() => new Array(cols).fill(0));
-        let i = 0;
 
         do {
             const row = this.RandomInteger(0, rows - 1);
@@ -54,11 +45,29 @@ export class GameOfLife {
                 continue;
             }
 
-            i++;
             resultField[row][col] = 1;
-        } while (i < aliveFields);
+
+            const alive = resultField.map(x => x.filter(y => y == 1).length);
+            const aliveCount = alive.reduce((sum, cur) => sum + cur, 0);
+
+            if (aliveCount >= aliveFields) {
+                break;
+            }
+        } while (true);
 
         return resultField;
+    }
+
+    private GetNeihborCount(currentState: number[][], i: number, rows: number, j: number, cols: number) {
+        let neighborCount = currentState[this.GetIndex(i - 1, rows)][this.GetIndex(j - 1, cols)] >= 1 ? 1 : 0;
+        neighborCount += currentState[this.GetIndex(i - 1, rows)][this.GetIndex(j, cols)] >= 1 ? 1 : 0;
+        neighborCount += currentState[this.GetIndex(i - 1, rows)][this.GetIndex(j + 1, cols)] >= 1 ? 1 : 0;
+        neighborCount += currentState[this.GetIndex(i, rows)][this.GetIndex(j - 1, cols)] >= 1 ? 1 : 0;
+        neighborCount += currentState[this.GetIndex(i, rows)][this.GetIndex(j + 1, cols)] >= 1 ? 1 : 0;
+        neighborCount += currentState[this.GetIndex(i + 1, rows)][this.GetIndex(j - 1, cols)] >= 1 ? 1 : 0;
+        neighborCount += currentState[this.GetIndex(i + 1, rows)][this.GetIndex(j, cols)] >= 1 ? 1 : 0;
+        neighborCount += currentState[this.GetIndex(i + 1, rows)][this.GetIndex(j + 1, cols)] >= 1 ? 1 : 0;
+        return neighborCount;
     }
 
     //Заворачиваем поле в тор

@@ -25,8 +25,8 @@ export const GridItem: React.FC<IGridItem> = props => {
             role={cn(GridItem.name)}
             style={{
                 ...props.customStyle,
-                ...(gridState.field[props.row][props.col] === 1
-                    ? {backgroundColor: 'green'}
+                ...(gridState.field[props.row][props.col] >= 1
+                    ? {backgroundColor: `rgb(0, ${255 - 10 * gridState.field[props.row][props.col]}, 0)`}
                     : {backgroundColor: 'white'}),
             }}
             onClick={() => {
