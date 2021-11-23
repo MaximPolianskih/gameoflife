@@ -4,8 +4,9 @@ import {RootState} from '../../store/store';
 import {ErrorHandler} from '../errorHandler/ErrorHandler';
 import {Options} from '../options/Options';
 import {changeUserName, ILoginState, login, LoginProcessEnum, logout,} from './LoginReducer';
+import {changeOptions, OptionsLoadingEnum} from "../options/OptionsReducer";
 
-export const Login: React.FC = props => {
+export const Login: React.FC = () => {
     const loginState = useSelector<RootState>(
         state => state.login,
     ) as ILoginState;
@@ -23,6 +24,7 @@ export const Login: React.FC = props => {
                         data-testid="logout-button"
                         onClick={() => {
                             dispatch(logout());
+                            dispatch(changeOptions({status: OptionsLoadingEnum.Loading}));
                         }}
                     >
                         Выйти

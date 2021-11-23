@@ -2,15 +2,17 @@ import React from 'react';
 import {cleanup, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {Login} from './Login';
-import {LoginProcessEnum} from './LoginReducer';
+import {store} from "../../store/store";
+import {Provider} from "react-redux";
 
 afterEach(cleanup);
 
 describe('Login component tests', () => {
     it('Change state test', () => {
-        render(<Login onChange={(row: number, col: number) => {
-        }} onLoginStatusChange={(loginStatus: LoginProcessEnum) => {
-        }}/>);
+        render(
+            <Provider store={store}>
+                <Login/>
+            </Provider>);
         const loginButton = screen.queryByTestId('login-button');
         const loginInput = screen.queryByTestId('login-input');
         expect(loginButton).toBeTruthy();

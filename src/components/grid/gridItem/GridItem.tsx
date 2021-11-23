@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React, {CSSProperties, useState} from 'react';
+import React, {CSSProperties} from 'react';
 import './grid-item.css';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../../store/store';
@@ -13,10 +13,6 @@ interface IGridItem {
 }
 
 export const GridItem: React.FC<IGridItem> = props => {
-    const [gridItemState, isActiveSetter] = useState({
-        col: props.col,
-        row: props.row,
-    });
     const gridState = useSelector<RootState>(state => state.grid) as IGridState;
 
     return (
@@ -24,10 +20,10 @@ export const GridItem: React.FC<IGridItem> = props => {
             className={cn(GridItem.name)}
             role={cn(GridItem.name)}
             style={{
-                ...props.customStyle,
-                ...(gridState.field[props.row][props.col] >= 1
+                ...(isActive(gridState, props.row, props.col)
                     ? {backgroundColor: `rgb(0, ${255 - 10 * gridState.field[props.row][props.col]}, 0)`}
                     : {backgroundColor: 'white'}),
+                ...props.customStyle
             }}
             onClick={() => {
                 props.clickHandler && props.clickHandler(props.col, props.row);
@@ -36,4 +32,15 @@ export const GridItem: React.FC<IGridItem> = props => {
     );
 };
 
+const isActive = (state: IGridState, row: number, col: number): boolean => {
+    if (!state) {
+        return false;
+    }
+    if(state.field.length <= row || state.field[0].length <= col)
+    {
+        return false;
+    }
+
+    return state.field[row][col] >= 1;
+}
 export default GridItem;

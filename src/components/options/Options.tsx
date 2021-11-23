@@ -10,7 +10,7 @@ import SpeedRegulator from './speedRegulator/SpeedRegulator';
 import './options.css'
 import cn from "classnames";
 
-export const Options: React.FC = props => {
+export const Options: React.FC = () => {
     const optionState = useSelector<RootState>(
         state => state.option,
     ) as IOptionState;
@@ -30,7 +30,7 @@ export const Options: React.FC = props => {
         return (
             <div>
                 <br></br>
-                <label data-testid="options-loader-lebel">
+                <label data-testid="options-loader-label">
                     Настройки пользователя {loginState.userName} загружаются...
                 </label>
             </div>
@@ -39,7 +39,7 @@ export const Options: React.FC = props => {
 
     if (optionState.status == OptionsLoadingEnum.Error) {
         return (
-            <label data-testid="options-loader-lebel">
+            <label data-testid="options-loader-label">
                 Ошибка при загрузке настроек пользователя {loginState.userName}.
             </label>
         );

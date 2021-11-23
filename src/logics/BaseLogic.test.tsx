@@ -1,13 +1,13 @@
 import {GameOfLife} from './BaseLogic';
 
 describe('Test base logic game of life', () => {
-    const genaratorDataSets = [
+    const generatorDataSets = [
         [3, 3, 10],
         [3, 3, 90],
         [5, 5, 50],
         [8, 3, 30],
     ];
-    it.each(genaratorDataSets)('Test GenerateRandomState', (rows, cols, percent) => {
+    it.each(generatorDataSets)('Test GenerateRandomState', (rows, cols, percent) => {
         const logic = new GameOfLife();
         var generatedField = logic.GenerateRandomState(rows, cols, percent);
         const aliveCount = generatedField.flat().filter(f => f === 1).length;
@@ -22,9 +22,9 @@ describe('Test base logic game of life', () => {
                 [0, 1, 0]
             ],
             [
-                [0, 1, 0],
-                [1, 0, 1],
-                [0, 1, 0]
+                [0, 2, 0],
+                [2, 0, 2],
+                [0, 2, 0]
             ]
         ],
         [
@@ -47,10 +47,10 @@ describe('Test base logic game of life', () => {
                 [0, 1, 0, 0]
             ],
             [
-                [1, 1, 1, 0],
-                [1, 0, 1, 0],
-                [1, 1, 1, 0],
-                [1, 1, 1, 0]
+                [1, 2, 1, 0],
+                [2, 0, 2, 0],
+                [1, 2, 1, 0],
+                [1, 2, 1, 0]
             ]
         ],
     ];

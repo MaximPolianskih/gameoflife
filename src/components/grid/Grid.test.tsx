@@ -1,15 +1,15 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
 import Grid from './Grid';
+import {store} from "../../store/store";
+import {Provider} from "react-redux";
 
 describe('Grid', () => {
     test('renders Grid component', () => {
-        var result = render(<Grid/>);
+        var result = render(
+            <Provider store={store}>
+                <Grid/>
+            </Provider>);
         expect(result.container.querySelector('.Grid')).toBeInTheDocument();
-    });
-    test('count GridItem elements', async () => {
-        render(<Grid/>);
-        const items = await screen.findAllByRole('GridItem');
-        expect(items).toHaveLength(25);
     });
 });

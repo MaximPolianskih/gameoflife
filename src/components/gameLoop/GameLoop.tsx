@@ -31,12 +31,6 @@ export const gameLoop = () => {
 
             if (isGameRunning.current) {
                 dispatch(nextIteration());
-
-                //TODO Запилить/найти нормальную функцию сравнения
-                // if(JSON.stringify(gridState.field) === JSON.stringify(gridField.current)){
-                //     dispatch(stopGame());
-                // }
-
                 gridField.current = [...gridState.field];
             }
         }

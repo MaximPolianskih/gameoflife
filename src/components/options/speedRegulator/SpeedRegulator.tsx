@@ -33,6 +33,7 @@ function SpeedRegulator({clickHandler}: ISpeedRegulator) {
     return (
         <div className={cn(SpeedRegulator.name)}>
             <label>Скорость анимации: {GetSpeedName(optionState.speed)}</label>
+            <br/>
             <button
                 style={{marginRight: 5, marginTop: 5}}
                 onClick={() => clickHandler(SpeedEnum.Slow)}
