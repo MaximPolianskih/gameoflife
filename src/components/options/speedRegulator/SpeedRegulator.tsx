@@ -31,7 +31,7 @@ function SpeedRegulator({clickHandler}: ISpeedRegulator) {
     ) as IOptionState;
 
     return (
-        <div className={cn(SpeedRegulator.name)}>
+        <div className="SpeedRegulator">
             <label>Скорость анимации: {GetSpeedName(optionState.speed)}</label>
             <br/>
             <button

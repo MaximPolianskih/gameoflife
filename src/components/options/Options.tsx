@@ -47,7 +47,7 @@ export const Options: React.FC = () => {
 
     return (
 
-        <div className={cn(Options.name)}>
+        <div className="Options">
             <label>Количество строк:</label>
             <input
                 data-testid="options-input-rows"

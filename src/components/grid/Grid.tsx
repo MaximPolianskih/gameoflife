@@ -42,7 +42,7 @@ export const Grid: React.FC = () => {
     }
 
     return (
-        <div className={cn(Grid.name)} role={cn(Grid.name)}>
+        <div className="Grid" role="Grid">
             {grid}
         </div>
     );

@@ -18,7 +18,7 @@ export const App: React.FC = () => {
 
     if (loginState.loginStatus === LoginProcessEnum.Login) {
         return (
-            <div className={cn(App.name)}>
+            <div className="App">
                 <div>
                     <Login/>
                 </div>
@@ -32,7 +32,7 @@ export const App: React.FC = () => {
     }
 
     return (
-        <div className={cn(App.name)}>
+        <div className="App">
             <Login/>
         </div>
     );

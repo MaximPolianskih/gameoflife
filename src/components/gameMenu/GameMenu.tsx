@@ -16,7 +16,7 @@ export const GameMenu: React.FC = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className={cn(GameMenu.name)}>
+        <div className="GameMenu">
             <button
                 style={{marginLeft: 10}}
                 data-testid={'game-menu-button-start'}
