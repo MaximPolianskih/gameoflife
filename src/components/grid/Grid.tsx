@@ -1,44 +1,51 @@
-import { ReactElement, useState } from 'react';
+import React, {ReactElement} from 'react';
 import cn from 'classnames';
 import GridItem from './gridItem/GridItem';
 import './grid.css';
-import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import {IGridState, setCellActivity} from './GridReducer';
+import {IOptionState} from '../options/OptionsReducer';
 
-interface IGridProps {
-  cols: number;
-  rows: number;
-}
+export const Grid: React.FC = () => {
+    const gridState = useSelector<RootState>(state => state.grid) as IGridState;
+    const optionState = useSelector<RootState>(
+        state => state.option,
+    ) as IOptionState;
+    const dispatch = useDispatch();
 
-function Grid({ rows, cols }: IGridProps) {
-  const grid: ReactElement[] = [];
-  const [selectItem, setSelectItem] = useState({ row: 0, col: 0 });
-  const ItemClickHandler = (row: number, col: number): void => setSelectItem({ row, col });
+    const grid: ReactElement[] = [];
 
-  for (let i = 1; i < rows + 1; i++) {
-    for (let j = 1; j < cols + 1; j++) {
-      grid.push(
-        <GridItem
-          col={i}
-          row={j}
-          isActive={false}
-          clickHandler={ItemClickHandler}
-          customStyle={{ gridRowStart: i, gridColumnStart: j }}
-          key = {`${i}-${j}`}
-        />
-      );
+    for (let i = 0; i < optionState.rows; i++) {
+        for (let j = 0; j < optionState.cols; j++) {
+            grid.push(
+                <GridItem
+                    row={i}
+                    col={j}
+                    clickHandler={() => {
+                        dispatch(
+                            setCellActivity({
+                                row: i,
+                                col: j,
+                                isActive: gridState.field[i][j] === 0,
+                            }),
+                        );
+                    }}
+                    customStyle={{
+                        gridRowStart: i + 1,
+                        gridColumnStart: j + 1,
+                    }}
+                    key={`${i}-${j}`}
+                />,
+            );
+        }
     }
-  }
 
-  return (
-    <div>
-      <label>
-        Выбрана я чейка: {selectItem.row}, {selectItem.col}
-      </label>
-      <div className={cn(Grid.name)} role={cn(Grid.name)}>
-        {grid}
-      </div>
-    </div>
-  );
-}
+    return (
+        <div className={cn(Grid.name)} role={cn(Grid.name)}>
+            {grid}
+        </div>
+    );
+};
 
 export default Grid;

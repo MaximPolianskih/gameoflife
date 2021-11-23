@@ -1,19 +1,18 @@
 import React from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import Grid from './Grid';
+import GameMenu from './GameMenu';
 import {store} from "../../store/store";
 import {Provider} from "react-redux";
 
 export default {
-    title: 'GameOfLife/Grid',
-    component: Grid,
-} as ComponentMeta<typeof Grid>;
+    title: 'GameOfLife/GameMenu',
+    component: GameMenu,
+} as ComponentMeta<typeof GameMenu>;
 
-const Template: ComponentStory<typeof Grid> = args => (
+const Template: ComponentStory<typeof GameMenu> = args => (
     <Provider store={store}>
-        <Grid {...args} />
+        <GameMenu/>
     </Provider>
 );
 
 export const Default = Template.bind({});
-Default.args = {};
