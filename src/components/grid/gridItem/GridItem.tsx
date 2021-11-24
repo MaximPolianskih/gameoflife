@@ -36,7 +36,7 @@ const isActive = (state: IGridState, row: number, col: number): boolean => {
     if (!state) {
         return false;
     }
-    if(state.field.length <= row || state.field[0].length <= col)
+    if(!state.field.length || !state.field[0].length)
     {
         return false;
     }

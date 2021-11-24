@@ -32,7 +32,7 @@ export const optionSlice = createSlice({
                 ...state,
             } as IOption);
         },
-        changeOptions: (state, {payload}) => {
+        changeOptions: (state, {payload}: PayloadAction<IOptionState>) => {
             return {...state, ...payload};
         },
     },

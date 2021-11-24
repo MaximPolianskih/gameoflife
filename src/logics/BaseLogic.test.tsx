@@ -1,4 +1,4 @@
-import {GameOfLife} from './BaseLogic';
+import { GameOfLife } from './BaseLogic';
 
 describe('Test base logic game of life', () => {
     const generatorDataSets = [
@@ -19,39 +19,39 @@ describe('Test base logic game of life', () => {
             [
                 [0, 1, 0],
                 [1, 0, 1],
-                [0, 1, 0]
+                [0, 1, 0],
             ],
             [
                 [0, 2, 0],
                 [2, 0, 2],
-                [0, 2, 0]
-            ]
+                [0, 2, 0],
+            ],
         ],
         [
             [
                 [0, 1, 0],
                 [1, 1, 1],
-                [0, 1, 0]
+                [0, 1, 0],
             ],
             [
                 [0, 0, 0],
                 [0, 0, 0],
-                [0, 0, 0]
-            ]
+                [0, 0, 0],
+            ],
         ],
         [
             [
                 [0, 1, 0, 0],
                 [1, 0, 1, 0],
                 [0, 1, 0, 0],
-                [0, 1, 0, 0]
+                [0, 1, 0, 0],
             ],
             [
                 [1, 2, 1, 0],
                 [2, 0, 2, 0],
                 [1, 2, 1, 0],
-                [1, 2, 1, 0]
-            ]
+                [1, 2, 1, 0],
+            ],
         ],
     ];
     it.each(dataSets)(

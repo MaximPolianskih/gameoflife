@@ -56,7 +56,7 @@ export const Options: React.FC = () => {
                 onChange={e => {
                     const num = parseInt(e.target.value, 10);
                     if (!isNaN(num)) {
-                        dispatch(changeOptions({rows: num}));
+                        dispatch(changeOptions({rows: num} as IOptionState));
                         dispatch(generateField({...optionState, rows: num}));
                     }
                 }}
@@ -69,7 +69,7 @@ export const Options: React.FC = () => {
                 onChange={e => {
                     const num = parseInt(e.target.value, 10);
                     if (!isNaN(num)) {
-                        dispatch(changeOptions({cols: num}));
+                        dispatch(changeOptions({cols: num} as IOptionState));
                         dispatch(generateField({...optionState, cols: num}));
                     }
                 }}
@@ -82,7 +82,7 @@ export const Options: React.FC = () => {
                 onChange={e => {
                     const num = parseInt(e.target.value, 10);
                     if (!isNaN(num)) {
-                        dispatch(changeOptions({percent: num}));
+                        dispatch(changeOptions({percent: num} as IOptionState));
                         dispatch(
                             generateField({...optionState, percent: num}),
                         );
@@ -91,7 +91,7 @@ export const Options: React.FC = () => {
             />
             <SpeedRegulator
                 clickHandler={(speed: number) => {
-                    dispatch(changeOptions({speed: speed}));
+                    dispatch(changeOptions({speed: speed} as IOptionState));
                 }}
             />
             <button

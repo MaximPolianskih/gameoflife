@@ -1,4 +1,4 @@
-import {configureStore} from '@reduxjs/toolkit';
+import {applyMiddleware, combineReducers, compose, configureStore, createStore} from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import GameMenuReducer from '../components/gameMenu/GameMenuReducer';
 import GridReducer from '../components/grid/GridReducer';
@@ -14,6 +14,18 @@ export const store = configureStore({
     },
     middleware: [thunk],
 });
+
+export const createTestStore = () => createStore(
+    combineReducers({
+        login: LoginReducer,
+        option: OptionsReducer,
+        grid: GridReducer,
+        gameMenu: GameMenuReducer,
+    }),
+    compose(
+        applyMiddleware(thunk)
+    )
+);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

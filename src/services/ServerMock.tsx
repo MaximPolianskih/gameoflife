@@ -19,9 +19,9 @@ export async function GetOptionsFromServer(userName: string) {
     ) as IOption;
 }
 
-export function CancelGetOptionsFromServer() {
-    clearTimeout(timeout);
-}
+// export function CancelGetOptionsFromServer() {
+//     clearTimeout(timeout);
+// }
 
 export function PutOptionsToServer(userName: string, options: IOption): void {
     localStorage.setItem(userName, JSON.stringify(options));
