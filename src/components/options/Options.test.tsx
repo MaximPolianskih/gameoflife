@@ -7,6 +7,7 @@ import { SpeedEnum } from './speedRegulator/SpeedRegulator';
 import { AnyAction, Store } from 'redux';
 import { createTestStore } from '../../store/store';
 import '@testing-library/jest-dom'
+import { GameOfLife } from '../../logics/BaseLogic';
 
 let store: Store<any>;
 beforeEach(() => {
@@ -71,17 +72,19 @@ describe('Options component tests', () => {
         fireEvent.change(screen.getByTestId('options-input-rows'), {target: {value: ''}});
         expect(store.getState().option.rows).toEqual(5);
 
-        fireEvent.change(screen.getByTestId('options-input-cols'), {target: {value: '7'}});
-        expect(store.getState().option.cols).toEqual(7);
+        fireEvent.change(screen.getByTestId('options-input-cols'), {target: {value: '6'}});
+        expect(store.getState().option.cols).toEqual(6);
 
         fireEvent.change(screen.getByTestId('options-input-cols'), {target: {value: ''}});
-        expect(store.getState().option.cols).toEqual(7);
+        expect(store.getState().option.cols).toEqual(6);
 
         fireEvent.change(screen.getByTestId('options-input-percent'), {target: {value: '50'}});
         expect(store.getState().option.percent).toEqual(50);
 
         fireEvent.change(screen.getByTestId('options-input-percent'), {target: {value: ''}});
         expect(store.getState().option.percent).toEqual(50);
+
+        expect(GameOfLife.GetAliveCount(store.getState().grid.field as [[]])).toEqual(5 * 6 * 50 / 100);
     });
 });
 

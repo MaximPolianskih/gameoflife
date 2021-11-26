@@ -23,8 +23,11 @@ describe('SpeedRegulator component tests', () => {
 
         expect(screen.queryByTestId('speed-regulator-label')).toBeTruthy();
         expect(screen.queryByTestId('speed-regulator-button-low')).toBeTruthy();
+        expect(screen.queryByTestId('speed-regulator-button-low')).toHaveClass("SpeedRegulatorButton");
         expect(screen.queryByTestId('speed-regulator-button-medium')).toBeTruthy();
+        expect(screen.queryByTestId('speed-regulator-button-medium')).toHaveClass("SpeedRegulatorButton");
         expect(screen.queryByTestId('speed-regulator-button-high')).toBeTruthy();
+        expect(screen.queryByTestId('speed-regulator-button-high')).toHaveClass("SpeedRegulatorButton");
 
         fireEvent.click(screen.getByTestId('speed-regulator-button-low'));
         expect(store.getState().option.speed).toEqual(SpeedEnum.Slow);

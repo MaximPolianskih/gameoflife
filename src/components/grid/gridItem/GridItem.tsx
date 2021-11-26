@@ -21,7 +21,7 @@ export const GridItem: React.FC<IGridItem> = props => {
             data-testid="grid-item"
             style={{
                 ...(isActive(gridState, props.row, props.col)
-                    ? {backgroundColor: `rgb(0, ${255 - 10 * gridState.field[props.row][props.col]}, 0)`}
+                    ? {backgroundColor: `rgb(0, ${255 - 10 * (gridState.field[props.row][props.col] - 1)}, 0)`}
                     : {backgroundColor: 'white'}),
                 ...props.customStyle
             }}

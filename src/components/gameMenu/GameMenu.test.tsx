@@ -5,6 +5,9 @@ import { createTestStore } from '../../store/store';
 import { Provider } from 'react-redux';
 import { AnyAction, Store } from 'redux';
 import reducer, { IGameMenuState, startGame, stopGame } from './GameMenuReducer';
+import { generateField, setCellActivity } from '../grid/GridReducer';
+import GridItem from '../grid/gridItem/GridItem';
+import { changeOptions, IOptionState, OptionsLoadingEnum } from '../options/OptionsReducer';
 
 
 let store: Store<any>;
@@ -48,8 +51,22 @@ describe('GameMenu component tests', () => {
 
         fireEvent.click(screen.getByTestId('game-menu-button-reset'));
         expect(store.getState().gameMenu.isGameRunning).toEqual(false);
+    });
+
+    test('Test GameMenu reset button click', () => {
+        store.dispatch(changeOptions({cols: 1, rows: 1, percent: 100} as IOptionState))
+        render(
+            <Provider store={store}>
+                <GameMenu/>
+            </Provider>);
+
+        fireEvent.click(screen.getByTestId('game-menu-button-reset'));
+        expect(store.getState().gameMenu.isGameRunning).toEqual(false);
         expect(store.getState().grid.field).toBeDefined();
         expect(store.getState().grid.field).not.toBeNull();
+        expect(store.getState().grid.field[0]).toBeDefined();
+        expect(store.getState().grid.field[0]).not.toBeNull();
+        expect(store.getState().grid.field[0][0]).toEqual(1);
     });
 });
 

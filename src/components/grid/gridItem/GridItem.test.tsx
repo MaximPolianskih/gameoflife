@@ -3,8 +3,9 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import GridItem from './GridItem';
 import { Provider } from 'react-redux';
 import reducer, { generateField, setCellActivity } from './../GridReducer';
-import { AnyAction, Store } from 'redux';
+import { AnyAction } from 'redux';
 import { createTestStore } from '../../../store/store';
+import { Store } from '@reduxjs/toolkit';
 
 let store: Store<any>;
 beforeEach(() => {
@@ -37,7 +38,7 @@ describe('GridItem', () => {
             </Provider>,
         );
 
-        expect(screen.queryByTestId('grid-item')).toHaveStyle('background-color: rgb(0, 245, 0)');
+        expect(screen.queryByTestId('grid-item')).toHaveStyle('background-color: rgb(0, 255, 0)');
 
         fireEvent.click(screen.getByTestId('grid-item'));
         expect(mockClickHandler).toHaveBeenCalled();

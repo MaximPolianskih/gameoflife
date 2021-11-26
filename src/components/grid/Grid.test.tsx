@@ -34,6 +34,9 @@ describe('Grid', () => {
 
         expect(screen.queryByTestId('grid')).toBeInTheDocument();
         expect(screen.getAllByTestId('grid-item').length).toEqual(35);
+
+        expect(screen.getAllByTestId('grid-item')[0]).toHaveStyle('grid-row-start: 1');
+        expect(screen.getAllByTestId('grid-item')[0]).toHaveStyle('grid-column-start: 1');
     });
 });
 
