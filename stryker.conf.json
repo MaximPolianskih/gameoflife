@@ -8,5 +8,11 @@
     "html"
   ],
   "coverageAnalysis": "all",
-  "mutate": ["src/**/*.ts?(x)", "!src/**/*@(.test|.spec|Spec|stories).ts?(x)", "!src/index.tsx"]
+  "mutate": [
+    "src/**/*.ts?(x)",
+    "!src/**/*@(.test|.spec|Spec|stories).ts?(x)",
+    "!src/index.tsx",
+    "!src/App.tsx",
+    "!src/**/store.tsx"
+  ]
 }
