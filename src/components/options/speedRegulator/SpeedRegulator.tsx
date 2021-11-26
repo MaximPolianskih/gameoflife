@@ -3,6 +3,7 @@ import cn from 'classnames';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../../store/store';
 import {IOptionState} from '../OptionsReducer';
+import './speed-regulator.css'
 
 export enum SpeedEnum {
     Slow = 2,
@@ -10,7 +11,7 @@ export enum SpeedEnum {
     Fast = 128,
 }
 
-function GetSpeedName(speed: SpeedEnum) {
+export function GetSpeedName(speed: SpeedEnum) {
     switch (speed) {
         case SpeedEnum.Fast:
             return 'Быстрая';
@@ -31,26 +32,28 @@ function SpeedRegulator({clickHandler}: ISpeedRegulator) {
     ) as IOptionState;
 
     return (
-        <div className="SpeedRegulator">
-            <label>Скорость анимации: {GetSpeedName(optionState.speed)}</label>
+        <div className="SpeedRegulator"
+             data-testid={'speed-regulator-component'}>
+            <label data-testid={'speed-regulator-label'}>Скорость анимации: {GetSpeedName(optionState.speed)}</label>
             <br/>
             <button
-                style={{marginRight: 5, marginTop: 5}}
+                className={"SpeedRegulatorButton"}
                 onClick={() => clickHandler(SpeedEnum.Slow)}
                 data-testid={'speed-regulator-button-low'}
             >
                 {GetSpeedName(SpeedEnum.Slow)}
             </button>
             <button
-                style={{marginRight: 5}}
+                className={"SpeedRegulatorButton"}
                 onClick={() => clickHandler(SpeedEnum.Medium)}
                 data-testid={'speed-regulator-button-medium'}
             >
                 {GetSpeedName(SpeedEnum.Medium)}
             </button>
             <button
+                className={"SpeedRegulatorButton"}
                 onClick={() => clickHandler(SpeedEnum.Fast)}
-                data-testid={'speed-regulator-button-hight'}
+                data-testid={'speed-regulator-button-high'}
             >
                 {GetSpeedName(SpeedEnum.Fast)}
             </button>

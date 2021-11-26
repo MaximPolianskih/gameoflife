@@ -31,7 +31,25 @@ describe('Options component tests', () => {
         expect(screen.queryByTestId('options-loader-label')).not.toBeTruthy();
     });
 
-    it('Click tests', async () => {
+    it('Init component with error', async () => {
+        store.dispatch(changeOptions({status: OptionsLoadingEnum.Error} as IOptionState))
+        expect(store.getState().option).toEqual({
+            rows: 0,
+            cols: 0,
+            percent: 0,
+            speed: SpeedEnum.Fast,
+            status: OptionsLoadingEnum.Error,
+        });
+
+        render(
+            <Provider store={store}>
+                <Options/>
+            </Provider>);
+
+        expect(screen.getByTestId('options-error-label')).toBeTruthy();
+    });
+
+    it('Options use cases', async () => {
         render(
             <Provider store={store}>
                 <Options/>
@@ -41,16 +59,28 @@ describe('Options component tests', () => {
 
         await new Promise((f) => setTimeout(f, 1000));
 
+        expect(screen.queryByTestId('options-load-complete')).toBeTruthy();
+        expect(screen.queryByTestId('speed-regulator-component')).toBeTruthy();
+
         fireEvent.click(screen.getByTestId('options-change-button'));
         expect(localStorage.getItem('')).not.toBeNull();
 
         fireEvent.change(screen.getByTestId('options-input-rows'), {target: {value: '5'}});
         expect(store.getState().option.rows).toEqual(5);
 
+        fireEvent.change(screen.getByTestId('options-input-rows'), {target: {value: ''}});
+        expect(store.getState().option.rows).toEqual(5);
+
         fireEvent.change(screen.getByTestId('options-input-cols'), {target: {value: '7'}});
         expect(store.getState().option.cols).toEqual(7);
 
+        fireEvent.change(screen.getByTestId('options-input-cols'), {target: {value: ''}});
+        expect(store.getState().option.cols).toEqual(7);
+
         fireEvent.change(screen.getByTestId('options-input-percent'), {target: {value: '50'}});
+        expect(store.getState().option.percent).toEqual(50);
+
+        fireEvent.change(screen.getByTestId('options-input-percent'), {target: {value: ''}});
         expect(store.getState().option.percent).toEqual(50);
     });
 });

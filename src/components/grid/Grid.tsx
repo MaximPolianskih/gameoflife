@@ -42,7 +42,7 @@ export const Grid: React.FC = () => {
     }
 
     return (
-        <div className="Grid" role="Grid">
+        <div className="Grid" data-testid="grid">
             {grid}
         </div>
     );

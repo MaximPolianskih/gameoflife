@@ -5,6 +5,7 @@ import {RootState} from '../../store/store';
 import {generateField} from '../grid/GridReducer';
 import {IOptionState} from '../options/OptionsReducer';
 import {IGameMenuState, startGame, stopGame} from './GameMenuReducer';
+import './game-menu.css';
 
 export const GameMenu: React.FC = () => {
     const optionState = useSelector<RootState>(
@@ -18,7 +19,7 @@ export const GameMenu: React.FC = () => {
     return (
         <div className="GameMenu">
             <button
-                style={{marginLeft: 10}}
+                className={"GameMenuButton"}
                 data-testid={'game-menu-button-start'}
                 onClick={() => {
                     dispatch(startGame());
@@ -27,7 +28,7 @@ export const GameMenu: React.FC = () => {
                 Запустить
             </button>
             <button
-                style={{marginLeft: 10}}
+                className={"GameMenuButton"}
                 data-testid={'game-menu-button-pause'}
                 onClick={() => {
                     dispatch(stopGame());
@@ -36,7 +37,7 @@ export const GameMenu: React.FC = () => {
                 Пауза
             </button>
             <button
-                style={{marginLeft: 10}}
+                className={"GameMenuButton"}
                 data-testid={'game-menu-button-reset'}
                 onClick={() => {
                     dispatch(stopGame());

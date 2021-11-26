@@ -7,5 +7,6 @@
     "clear-text",
     "html"
   ],
-  "coverageAnalysis": "all"
+  "coverageAnalysis": "all",
+  "mutate": ["src/**/*.ts?(x)", "!src/**/*@(.test|.spec|Spec|stories).ts?(x)", "!src/index.tsx"]
 }

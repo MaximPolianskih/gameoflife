@@ -1,41 +1,45 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import GridItem from './GridItem';
 import { Provider } from 'react-redux';
-import reducer, { setCellActivity } from './../GridReducer';
-import { AnyAction } from 'redux';
-import { store } from '../../../store/store';
+import reducer, { generateField, setCellActivity } from './../GridReducer';
+import { AnyAction, Store } from 'redux';
+import { createTestStore } from '../../../store/store';
+
+let store: Store<any>;
+beforeEach(() => {
+    store = createTestStore();
+});
+afterEach(cleanup);
 
 describe('GridItem', () => {
     test('renders GridItem component', () => {
         reducer(undefined, {} as AnyAction);
-        const result = render(
+        render(
             <Provider store={store}>
                 <GridItem col={0} row={0} clickHandler={() => {
                 }}/>
             </Provider>,
         );
 
-        expect(result.container.querySelector('.GridItem')).toBeInTheDocument();
-        expect(result.container.querySelector('.GridItem')).toHaveStyle('background-color: white');
+        expect(screen.queryByTestId('grid-item')).toBeInTheDocument();
+        expect(screen.queryByTestId('grid-item')).toHaveStyle('background-color: white');
     });
 
-    // test('Render GridItem component active', () => {
-    //     const newState = reducer({ field: [[0]] }, setCellActivity({ row: 0, col: 0, isActive: true }));
-    //
-    //     expect(newState).toEqual({ field: [[1]] });
-    //
-    //     const result = render(
-    //         <Provider store={store}>
-    //             <GridItem col={0} row={0} clickHandler={() => {
-    //             }}/>
-    //         </Provider>,
-    //     );
-    //
-    //     expect(result.container.querySelector('.GridItem')).toHaveStyle('background-color: green');
-    // });
-});
+    test('Render GridItem component active', () => {
+        store.dispatch(generateField({ rows: 1, cols: 1, percent: 0, speed: 2 }));
+        store.dispatch(setCellActivity({ row: 0, col: 0, isActive: true }));
+        const mockClickHandler = jest.fn();
 
-// describe('GridItem state tests', () => {
-//
-// });
+        render(
+            <Provider store={store}>
+                <GridItem col={0} row={0} clickHandler={mockClickHandler}/>
+            </Provider>,
+        );
+
+        expect(screen.queryByTestId('grid-item')).toHaveStyle('background-color: rgb(0, 245, 0)');
+
+        fireEvent.click(screen.getByTestId('grid-item'));
+        expect(mockClickHandler).toHaveBeenCalled();
+    });
+});

@@ -7,7 +7,8 @@ export interface ILoginState {
 
 export enum LoginProcessEnum {
     Login,
-    Logout
+    Logout,
+    Error
 }
 
 export const loginSlice = createSlice({

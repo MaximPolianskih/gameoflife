@@ -18,7 +18,7 @@ export const GridItem: React.FC<IGridItem> = props => {
     return (
         <div
             className="GridItem"
-            role="GridItem"
+            data-testid="grid-item"
             style={{
                 ...(isActive(gridState, props.row, props.col)
                     ? {backgroundColor: `rgb(0, ${255 - 10 * gridState.field[props.row][props.col]}, 0)`}

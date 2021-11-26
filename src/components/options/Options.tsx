@@ -1,14 +1,13 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {GameOfLife} from '../../logics/BaseLogic';
-import {getOptionsFromServer} from '../../actions/Actions';
-import {RootState} from '../../store/store';
-import {generateField} from '../grid/GridReducer';
-import {ILoginState} from '../login/LoginReducer';
-import {applyOptions, changeOptions, IOptionState, OptionsLoadingEnum,} from './OptionsReducer';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { GameOfLife } from '../../logics/BaseLogic';
+import { getOptionsFromServer } from '../../actions/Actions';
+import { RootState } from '../../store/store';
+import { generateField } from '../grid/GridReducer';
+import { ILoginState } from '../login/LoginReducer';
+import { applyOptions, changeOptions, IOptionState, OptionsLoadingEnum } from './OptionsReducer';
 import SpeedRegulator from './speedRegulator/SpeedRegulator';
-import './options.css'
-import cn from "classnames";
+import './options.css';
 
 export const Options: React.FC = () => {
     const optionState = useSelector<RootState>(
@@ -21,7 +20,7 @@ export const Options: React.FC = () => {
     const logic = new GameOfLife();
 
     useEffect(() => {
-        if (optionState.status !== OptionsLoadingEnum.Complete) {
+        if (optionState.status === OptionsLoadingEnum.Loading) {
             dispatch(getOptionsFromServer(loginState.userName));
         }
     });
@@ -39,7 +38,7 @@ export const Options: React.FC = () => {
 
     if (optionState.status == OptionsLoadingEnum.Error) {
         return (
-            <label data-testid="options-loader-label">
+            <label data-testid="options-error-label">
                 Ошибка при загрузке настроек пользователя {loginState.userName}.
             </label>
         );
@@ -47,7 +46,8 @@ export const Options: React.FC = () => {
 
     return (
 
-        <div className="Options">
+        <div className="Options"
+             data-testid="options-load-complete">
             <label>Количество строк:</label>
             <input
                 data-testid="options-input-rows"
@@ -56,8 +56,8 @@ export const Options: React.FC = () => {
                 onChange={e => {
                     const num = parseInt(e.target.value, 10);
                     if (!isNaN(num)) {
-                        dispatch(changeOptions({rows: num} as IOptionState));
-                        dispatch(generateField({...optionState, rows: num}));
+                        dispatch(changeOptions({ rows: num } as IOptionState));
+                        dispatch(generateField({ ...optionState, rows: num }));
                     }
                 }}
             />
@@ -69,8 +69,8 @@ export const Options: React.FC = () => {
                 onChange={e => {
                     const num = parseInt(e.target.value, 10);
                     if (!isNaN(num)) {
-                        dispatch(changeOptions({cols: num} as IOptionState));
-                        dispatch(generateField({...optionState, cols: num}));
+                        dispatch(changeOptions({ cols: num } as IOptionState));
+                        dispatch(generateField({ ...optionState, cols: num }));
                     }
                 }}
             />
@@ -82,16 +82,14 @@ export const Options: React.FC = () => {
                 onChange={e => {
                     const num = parseInt(e.target.value, 10);
                     if (!isNaN(num)) {
-                        dispatch(changeOptions({percent: num} as IOptionState));
-                        dispatch(
-                            generateField({...optionState, percent: num}),
-                        );
+                        dispatch(changeOptions({ percent: num } as IOptionState));
+                        dispatch(generateField({ ...optionState, percent: num }));
                     }
                 }}
             />
             <SpeedRegulator
                 clickHandler={(speed: number) => {
-                    dispatch(changeOptions({speed: speed} as IOptionState));
+                    dispatch(changeOptions({ speed: speed } as IOptionState));
                 }}
             />
             <button

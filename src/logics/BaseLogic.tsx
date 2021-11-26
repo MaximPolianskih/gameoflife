@@ -47,8 +47,7 @@ export class GameOfLife {
 
             resultField[row][col] = 1;
 
-            const alive = resultField.map(x => x.filter(y => y == 1).length);
-            const aliveCount = alive.reduce((sum, cur) => sum + cur, 0);
+            const aliveCount = GameOfLife.GetAliveCount(resultField);
 
             if (aliveCount >= aliveFields) {
                 break;
@@ -56,6 +55,13 @@ export class GameOfLife {
         } while (true);
 
         return resultField;
+    }
+
+    public static GetAliveCount(field: number[][]){
+        const alive = field.map(x => x.filter(y => y == 1).length);
+        const aliveCount = alive.reduce((sum, cur) => sum + cur, 0);
+
+        return aliveCount;
     }
 
     private GetNeihborCount(currentState: number[][], i: number, rows: number, j: number, cols: number) {
