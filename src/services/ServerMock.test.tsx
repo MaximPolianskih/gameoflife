@@ -24,6 +24,6 @@ describe('ServerMock tests', () => {
 
     test('GetOptionsFromServer by unexpected user name', async () => {
         const options = await GetOptionsFromServer('unexpected user name');
-        expect(options).toEqual({ rows: 50, cols: 150, percent: 50, speed: SpeedEnum.Fast });
+        expect(options).toEqual({ rows: 50, cols: 50, percent: 50, speed: SpeedEnum.Slow });
     });
 });

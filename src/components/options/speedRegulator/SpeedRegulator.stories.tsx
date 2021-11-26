@@ -1,8 +1,8 @@
 import React from 'react';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import SpeedRegulator from './SpeedRegulator';
-import {store} from "../../../store/store";
-import {Provider} from "react-redux";
+import { store } from '../../../store/store';
+import { Provider } from 'react-redux';
 
 export default {
     title: 'GameOfLife/SpeedRegulator',

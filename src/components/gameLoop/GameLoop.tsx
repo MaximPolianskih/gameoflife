@@ -1,19 +1,19 @@
-import React, {useEffect, useRef} from "react";
-import {IGridState, nextIteration} from "../grid/GridReducer";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store/store";
-import {IGameMenuState, stopGame} from "../gameMenu/GameMenuReducer";
-import {IOptionState} from "../options/OptionsReducer";
+import React, { useEffect, useRef } from 'react';
+import { IGridState, nextIteration } from '../grid/GridReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { IGameMenuState } from '../gameMenu/GameMenuReducer';
+import { IOptionState } from '../options/OptionsReducer';
 
 export const gameLoop = () => {
     const gameMenuState = useSelector<RootState>(
-        state => state.gameMenu
+        state => state.gameMenu,
     ) as IGameMenuState;
     const optionState = useSelector<RootState>(
-        state => state.option
+        state => state.option,
     ) as IOptionState;
     const gridState = useSelector<RootState>(
-        state => state.grid
+        state => state.grid,
     ) as IGridState;
     const dispatch = useDispatch();
 
@@ -36,7 +36,7 @@ export const gameLoop = () => {
         }
 
         requestId.current = requestAnimationFrame(loop);
-    }
+    };
 
     useEffect(() => {
         requestId.current = requestAnimationFrame(loop);
@@ -45,4 +45,4 @@ export const gameLoop = () => {
 
         return () => cancelAnimationFrame(requestId.current as number);
     }, [gameMenuState.isGameRunning, optionState.speed, gridState.field]);
-}
+};

@@ -6,7 +6,7 @@ import reducer, { applyOptions, changeOptions, IOptionState, OptionsLoadingEnum 
 import { SpeedEnum } from './speedRegulator/SpeedRegulator';
 import { AnyAction, Store } from 'redux';
 import { createTestStore } from '../../store/store';
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom';
 import { GameOfLife } from '../../logics/BaseLogic';
 
 let store: Store<any>;
@@ -33,7 +33,7 @@ describe('Options component tests', () => {
     });
 
     it('Init component with error', async () => {
-        store.dispatch(changeOptions({status: OptionsLoadingEnum.Error} as IOptionState))
+        store.dispatch(changeOptions({ status: OptionsLoadingEnum.Error } as IOptionState));
         expect(store.getState().option).toEqual({
             rows: 0,
             cols: 0,
@@ -66,22 +66,22 @@ describe('Options component tests', () => {
         fireEvent.click(screen.getByTestId('options-change-button'));
         expect(localStorage.getItem('')).not.toBeNull();
 
-        fireEvent.change(screen.getByTestId('options-input-rows'), {target: {value: '5'}});
+        fireEvent.change(screen.getByTestId('options-input-rows'), { target: { value: '5' } });
         expect(store.getState().option.rows).toEqual(5);
 
-        fireEvent.change(screen.getByTestId('options-input-rows'), {target: {value: ''}});
+        fireEvent.change(screen.getByTestId('options-input-rows'), { target: { value: '' } });
         expect(store.getState().option.rows).toEqual(5);
 
-        fireEvent.change(screen.getByTestId('options-input-cols'), {target: {value: '6'}});
+        fireEvent.change(screen.getByTestId('options-input-cols'), { target: { value: '6' } });
         expect(store.getState().option.cols).toEqual(6);
 
-        fireEvent.change(screen.getByTestId('options-input-cols'), {target: {value: ''}});
+        fireEvent.change(screen.getByTestId('options-input-cols'), { target: { value: '' } });
         expect(store.getState().option.cols).toEqual(6);
 
-        fireEvent.change(screen.getByTestId('options-input-percent'), {target: {value: '50'}});
+        fireEvent.change(screen.getByTestId('options-input-percent'), { target: { value: '50' } });
         expect(store.getState().option.percent).toEqual(50);
 
-        fireEvent.change(screen.getByTestId('options-input-percent'), {target: {value: ''}});
+        fireEvent.change(screen.getByTestId('options-input-percent'), { target: { value: '' } });
         expect(store.getState().option.percent).toEqual(50);
 
         expect(GameOfLife.GetAliveCount(store.getState().grid.field as [[]])).toEqual(5 * 6 * 50 / 100);

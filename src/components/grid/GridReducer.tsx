@@ -1,7 +1,7 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {GameOfLife} from '../../logics/BaseLogic';
-import {getOptionsFromServer} from '../../actions/Actions';
-import {IOption} from '../../services/ServerMock';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { GameOfLife } from '../../logics/BaseLogic';
+import { getOptionsFromServer } from '../../actions/Actions';
+import { IOption } from '../../services/ServerMock';
 
 export interface IGridState {
     field: number[][];
@@ -28,21 +28,21 @@ export const gridSlice = createSlice({
         nextIteration: state => {
             state.field = logic.CalculateNextState(state.field);
         },
-        generateField: (state, {payload}: PayloadAction<IOption>) =>
+        generateField: (state, { payload }: PayloadAction<IOption>) =>
             SetNewField(state, payload),
         setCellActivity: (state,
-                          {payload}: PayloadAction<{ row: number; col: number; isActive: boolean }>,) => {
+                          { payload }: PayloadAction<{ row: number; col: number; isActive: boolean }>) => {
             state.field[payload.row][payload.col] = payload.isActive
                 ? 1
                 : 0;
         },
     },
     extraReducers: builder => {
-        builder.addCase(getOptionsFromServer.fulfilled, (state, {payload}) =>
+        builder.addCase(getOptionsFromServer.fulfilled, (state, { payload }) =>
             SetNewField(state, payload),
         );
     },
 });
 
-export const {nextIteration, generateField, setCellActivity} = gridSlice.actions;
+export const { nextIteration, generateField, setCellActivity } = gridSlice.actions;
 export default gridSlice.reducer;

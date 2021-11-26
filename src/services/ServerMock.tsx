@@ -1,4 +1,4 @@
-import {SpeedEnum} from "../components/options/speedRegulator/SpeedRegulator";
+import { SpeedEnum } from '../components/options/speedRegulator/SpeedRegulator';
 
 export interface IOption {
     rows: number;
@@ -15,7 +15,7 @@ export async function GetOptionsFromServer(userName: string) {
     return (
         options
             ? JSON.parse(options)
-            : {rows: 50, cols: 150, percent: 50, speed: SpeedEnum.Fast}
+            : { rows: 50, cols: 50, percent: 50, speed: SpeedEnum.Slow }
     ) as IOption;
 }
 

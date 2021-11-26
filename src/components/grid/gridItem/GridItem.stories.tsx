@@ -1,8 +1,8 @@
 import React from 'react';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import GridItem from './GridItem';
-import {store} from "../../../store/store";
-import {Provider} from "react-redux";
+import { store } from '../../../store/store';
+import { Provider } from 'react-redux';
 import './grid-item.css';
 
 export default {
@@ -23,7 +23,7 @@ Default.args = {
     customStyle: {
         gridRowStart: 1,
         gridColumnStart: 1,
-    }
+    },
 };
 
 export const Active = Template.bind({});
@@ -33,8 +33,8 @@ Active.args = {
     customStyle: {
         gridRowStart: 1,
         gridColumnStart: 1,
-        backgroundColor: "green",
+        backgroundColor: 'green',
         width: 10,
-        height: 10
-    }
+        height: 10,
+    },
 };

@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface ILoginState {
     loginStatus: LoginProcessEnum;
@@ -18,7 +18,7 @@ export const loginSlice = createSlice({
         loginStatus: LoginProcessEnum.Logout,
     } as ILoginState,
     reducers: {
-        changeUserName: (state, {payload}: PayloadAction<string>) => {
+        changeUserName: (state, { payload }: PayloadAction<string>) => {
             state.userName = payload;
         },
         login: state => {
@@ -31,6 +31,6 @@ export const loginSlice = createSlice({
     },
 });
 
-export const {login, logout, changeUserName} = loginSlice.actions;
+export const { login, logout, changeUserName } = loginSlice.actions;
 
 export default loginSlice.reducer;

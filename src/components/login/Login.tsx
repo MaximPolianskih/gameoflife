@@ -1,11 +1,11 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../store/store';
-import {ErrorHandler} from '../errorHandler/ErrorHandler';
-import {Options} from '../options/Options';
-import {changeUserName, ILoginState, login, LoginProcessEnum, logout,} from './LoginReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { ErrorHandler } from '../errorHandler/ErrorHandler';
+import { Options } from '../options/Options';
+import { changeUserName, ILoginState, login, LoginProcessEnum, logout } from './LoginReducer';
 import { changeOptions, IOptionState, OptionsLoadingEnum } from '../options/OptionsReducer';
-import './login.css'
+import './login.css';
 
 export const Login: React.FC = () => {
     const loginState = useSelector<RootState>(
@@ -21,11 +21,11 @@ export const Login: React.FC = () => {
                         Пользователь: {loginState.userName}
                     </span>
                     <button
-                        className={"LogoutButton"}
+                        className={'LogoutButton'}
                         data-testid="logout-button"
                         onClick={() => {
                             dispatch(logout());
-                            dispatch(changeOptions({status: OptionsLoadingEnum.Loading} as IOptionState));
+                            dispatch(changeOptions({ status: OptionsLoadingEnum.Loading } as IOptionState));
                         }}
                     >
                         Выйти
@@ -40,7 +40,7 @@ export const Login: React.FC = () => {
                 <div>
                     <label>Введите имя пользователя:</label>
                     <input
-                        className={"LoginInput"}
+                        className={'LoginInput'}
                         data-testid="login-input"
                         type="text"
                         value={loginState.userName}

@@ -30,7 +30,7 @@ describe('Login component tests', () => {
         const logoutButton = screen.queryByTestId('logout-button');
         expect(screen.queryByTestId('login-name')).toBeTruthy();
         expect(logoutButton).toBeTruthy();
-        expect(logoutButton).toHaveClass("LogoutButton");
+        expect(logoutButton).toHaveClass('LogoutButton');
         expect(screen.queryByTestId('login-button')).toBe(null);
         expect(screen.queryByTestId('login-input')).toBe(null);
 
@@ -39,10 +39,10 @@ describe('Login component tests', () => {
         expect(screen.queryByTestId('login-button')).toBeTruthy();
         const input = screen.queryByTestId('login-input');
         expect(input).toBeTruthy();
-        expect(input).toHaveClass("LoginInput");
+        expect(input).toHaveClass('LoginInput');
 
         userEvent.paste(input as HTMLElement, '123');
-        expect(store.getState().login.userName).toBe('123')
+        expect(store.getState().login.userName).toBe('123');
     });
 });
 
@@ -57,7 +57,7 @@ describe('LoginReducer tests', () => {
         expect(reducer({
             userName: '',
             loginStatus: LoginProcessEnum.Logout,
-        } as ILoginState, changeUserName("UserName"))).toEqual({
+        } as ILoginState, changeUserName('UserName'))).toEqual({
             userName: 'UserName',
             loginStatus: LoginProcessEnum.Logout,
         } as ILoginState);

@@ -1,4 +1,4 @@
-import React, {Component, ErrorInfo, ReactNode} from 'react';
+import React, { Component, ErrorInfo, ReactNode } from 'react';
 
 interface Props {
     children: ReactNode;
@@ -14,11 +14,11 @@ export class ErrorHandler extends Component<Props, State> {
     };
 
     static getDerivedStateFromError(_: Error): State {
-        return {hasError: true};
+        return { hasError: true };
     }
 
     componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-        this.setState({hasError: true});
+        this.setState({ hasError: true });
         console.error('Произошла ошибка:', error, errorInfo);
     }
 

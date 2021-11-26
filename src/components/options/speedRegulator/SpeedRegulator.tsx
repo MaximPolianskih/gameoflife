@@ -1,9 +1,8 @@
 import React from 'react';
-import cn from 'classnames';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../../store/store';
-import {IOptionState} from '../OptionsReducer';
-import './speed-regulator.css'
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
+import { IOptionState } from '../OptionsReducer';
+import './speed-regulator.css';
 
 export enum SpeedEnum {
     Slow = 2,
@@ -26,7 +25,7 @@ interface ISpeedRegulator {
     clickHandler: (speed: number) => void;
 }
 
-function SpeedRegulator({clickHandler}: ISpeedRegulator) {
+function SpeedRegulator({ clickHandler }: ISpeedRegulator) {
     const optionState = useSelector<RootState>(
         state => state.option,
     ) as IOptionState;
@@ -37,21 +36,21 @@ function SpeedRegulator({clickHandler}: ISpeedRegulator) {
             <label data-testid={'speed-regulator-label'}>Скорость анимации: {GetSpeedName(optionState.speed)}</label>
             <br/>
             <button
-                className={"SpeedRegulatorButton"}
+                className={'SpeedRegulatorButton'}
                 onClick={() => clickHandler(SpeedEnum.Slow)}
                 data-testid={'speed-regulator-button-low'}
             >
                 {GetSpeedName(SpeedEnum.Slow)}
             </button>
             <button
-                className={"SpeedRegulatorButton"}
+                className={'SpeedRegulatorButton'}
                 onClick={() => clickHandler(SpeedEnum.Medium)}
                 data-testid={'speed-regulator-button-medium'}
             >
                 {GetSpeedName(SpeedEnum.Medium)}
             </button>
             <button
-                className={"SpeedRegulatorButton"}
+                className={'SpeedRegulatorButton'}
                 onClick={() => clickHandler(SpeedEnum.Fast)}
                 data-testid={'speed-regulator-button-high'}
             >

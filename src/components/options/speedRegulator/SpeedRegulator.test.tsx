@@ -17,17 +17,17 @@ describe('SpeedRegulator component tests', () => {
         render(
             <Provider store={store}>
                 <SpeedRegulator clickHandler={(speed: number) => {
-                    store.dispatch(changeOptions({ speed: speed } as IOptionState))
+                    store.dispatch(changeOptions({ speed: speed } as IOptionState));
                 }}/>
             </Provider>);
 
         expect(screen.queryByTestId('speed-regulator-label')).toBeTruthy();
         expect(screen.queryByTestId('speed-regulator-button-low')).toBeTruthy();
-        expect(screen.queryByTestId('speed-regulator-button-low')).toHaveClass("SpeedRegulatorButton");
+        expect(screen.queryByTestId('speed-regulator-button-low')).toHaveClass('SpeedRegulatorButton');
         expect(screen.queryByTestId('speed-regulator-button-medium')).toBeTruthy();
-        expect(screen.queryByTestId('speed-regulator-button-medium')).toHaveClass("SpeedRegulatorButton");
+        expect(screen.queryByTestId('speed-regulator-button-medium')).toHaveClass('SpeedRegulatorButton');
         expect(screen.queryByTestId('speed-regulator-button-high')).toBeTruthy();
-        expect(screen.queryByTestId('speed-regulator-button-high')).toHaveClass("SpeedRegulatorButton");
+        expect(screen.queryByTestId('speed-regulator-button-high')).toHaveClass('SpeedRegulatorButton');
 
         fireEvent.click(screen.getByTestId('speed-regulator-button-low'));
         expect(store.getState().option.speed).toEqual(SpeedEnum.Slow);
@@ -40,8 +40,8 @@ describe('SpeedRegulator component tests', () => {
     });
 
     it('Test GetSpeedName function', () => {
-        expect(GetSpeedName(SpeedEnum.Slow)).toEqual("Медленная");
-        expect(GetSpeedName(SpeedEnum.Medium)).toEqual("Средняя");
-        expect(GetSpeedName(SpeedEnum.Fast)).toEqual("Быстрая");
-    })
+        expect(GetSpeedName(SpeedEnum.Slow)).toEqual('Медленная');
+        expect(GetSpeedName(SpeedEnum.Medium)).toEqual('Средняя');
+        expect(GetSpeedName(SpeedEnum.Fast)).toEqual('Быстрая');
+    });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
-import {ComponentMeta} from '@storybook/react';
-import {ErrorHandler} from './ErrorHandler';
+import { ComponentMeta } from '@storybook/react';
+import { ErrorHandler } from './ErrorHandler';
 
 export default {
     title: 'GameOfLife/ErrorHandler',
@@ -12,7 +12,7 @@ interface IState {
 }
 
 class WrappedComponent extends React.Component<{}, IState> {
-    state = {isClicked: false};
+    state = { isClicked: false };
 
     render() {
         if (this.state.isClicked) {
@@ -21,7 +21,7 @@ class WrappedComponent extends React.Component<{}, IState> {
         return (
             <button
                 onClick={() => {
-                    this.setState({isClicked: true});
+                    this.setState({ isClicked: true });
                 }}
             >
                 Нажать для вызова ошибки

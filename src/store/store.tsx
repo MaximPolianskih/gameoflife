@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, compose, configureStore, createStore} from '@reduxjs/toolkit';
+import { applyMiddleware, combineReducers, compose, configureStore, createStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import GameMenuReducer from '../components/gameMenu/GameMenuReducer';
 import GridReducer from '../components/grid/GridReducer';
@@ -23,8 +23,8 @@ export const createTestStore = () => createStore(
         gameMenu: GameMenuReducer,
     }),
     compose(
-        applyMiddleware(thunk)
-    )
+        applyMiddleware(thunk),
+    ),
 );
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -5,9 +5,7 @@ import { createTestStore } from '../../store/store';
 import { Provider } from 'react-redux';
 import { AnyAction, Store } from 'redux';
 import reducer, { IGameMenuState, startGame, stopGame } from './GameMenuReducer';
-import { generateField, setCellActivity } from '../grid/GridReducer';
-import GridItem from '../grid/gridItem/GridItem';
-import { changeOptions, IOptionState, OptionsLoadingEnum } from '../options/OptionsReducer';
+import { changeOptions, IOptionState } from '../options/OptionsReducer';
 
 
 let store: Store<any>;
@@ -54,7 +52,7 @@ describe('GameMenu component tests', () => {
     });
 
     test('Test GameMenu reset button click', () => {
-        store.dispatch(changeOptions({cols: 1, rows: 1, percent: 100} as IOptionState))
+        store.dispatch(changeOptions({ cols: 1, rows: 1, percent: 100 } as IOptionState));
         render(
             <Provider store={store}>
                 <GameMenu/>

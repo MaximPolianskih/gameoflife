@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export interface IGameMenuState {
     isGameRunning: boolean;
@@ -19,5 +19,5 @@ export const gameMenuSlice = createSlice({
     },
 });
 
-export const {startGame, stopGame} = gameMenuSlice.actions;
+export const { startGame, stopGame } = gameMenuSlice.actions;
 export default gameMenuSlice.reducer;

@@ -1,6 +1,6 @@
 import React from 'react';
-import {cleanup, render, screen} from '@testing-library/react';
-import {ErrorHandler} from './ErrorHandler';
+import { cleanup, render, screen } from '@testing-library/react';
+import { ErrorHandler } from './ErrorHandler';
 
 afterEach(cleanup);
 
@@ -13,7 +13,7 @@ describe('ErrorHandler for Class  test', () => {
         render(
             <ErrorHandler>
                 <WrappedComponent/>
-            </ErrorHandler>
+            </ErrorHandler>,
         );
 
         expect(screen.getAllByTestId('error-component').length).toBe(1);
@@ -27,7 +27,7 @@ describe('ErrorHandler for Class  test', () => {
         render(
             <ErrorHandler>
                 <WrappedComponent/>
-            </ErrorHandler>
+            </ErrorHandler>,
         );
         expect(screen.queryAllByTestId('error-component').length).toBe(0);
         expect(screen.getAllByTestId('no-error-component').length).toBe(1);

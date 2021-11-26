@@ -1,8 +1,8 @@
 import React from 'react';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {Options} from './Options';
-import {Provider} from 'react-redux';
-import {store} from '../../store/store';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Options } from './Options';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 
 export default {
     title: 'GameOfLife/Option',
